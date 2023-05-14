@@ -1,0 +1,90 @@
+﻿@model LaptopShopMVC.Models.SANPHAM
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+<button class="btn btn-info" style="width: 120px">
+    @Html.ActionLink("Back", "Index")
+</button>
+
+<h2 style="text-align:center">Chi Tiết Sản Phẩm</h2>
+
+<div class="row">
+    <div class="col-sm-6" >
+        <h4 style="text-align:center">Thông Số Sản Phẩm</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Mã Danh Mục : @Html.DisplayFor(model => model.DANHMUC.MADANHMUC)
+
+            </dt>
+
+            <dt>
+                Tên Danh Mục : @Html.DisplayFor(model => model.DANHMUC.TENDANHMUC)
+            </dt>
+
+            <dt>
+                Tên Thương Hiệu : @Html.DisplayFor(model => model.THUONGHIEU.TENTHUONGHIEU)
+            </dt>
+
+            <dt>
+                Tên Sản Phẩm : @Html.DisplayFor(model => model.TENSANPHAM)
+            </dt>
+
+            <dt>
+                Mô Tả: @Html.DisplayFor(model => model.MOTA)
+            </dt>
+
+            <dt>
+                Ram : @Html.DisplayFor(model => model.RAM)
+            </dt>
+
+            <dt>
+                Rom : @Html.DisplayFor(model => model.ROM)
+            </dt>
+
+            <dt>
+                CPU : @Html.DisplayFor(model => model.CPU)
+            </dt>
+
+            <dt>
+                Card Màn Hình : @Html.DisplayFor(model => model.CARDMANHINH)
+            </dt>
+
+            <dt>
+                Thời Gian Bảo Hành : @Html.DisplayFor(model => model.THOIGIANBAOHANH)
+            </dt>
+
+            <dt>
+                Giá Bán : @Html.DisplayFor(model => model.GIABAN)
+            </dt>
+
+            <dt>
+                Giá Nhập
+            </dt>
+
+            <dt>
+                Tình Trạng : @Html.DisplayFor(model => model.TINHTRANG)
+            </dt>
+
+            <dt>
+                Số Lượng :@Html.DisplayFor(model => model.SOLUONG)
+            </dt>
+        </dl>
+    </div>
+    <div class="col-sm-6">
+        <h4 style="text-align:center">Hình Ảnh</h4>
+        @*@Html.DisplayFor(model => model.HINH)*@
+        <img src="https://cdn.tgdd.vn/Products/Images/44/279259/Kit/asus-tuf-gaming-fx506lhb-i5-hn188w-note.jpg" width="600" height="370"/>
+    </div>
+</div>
+
+
+<style>
+    .dl-horizontal{
+        margin-left: 50px;
+
+        text-align:left;
+    }
+</style>

@@ -1,0 +1,60 @@
+﻿@model LaptopShopMVC.Models.NHANVIEN
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<div style="text-align:center">
+    <h2>Xóa Nhân Viên</h2>
+    <h3>Bạn có chắc chắn muốn xóa nhân viên này?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Mã Nhân Viên : @Html.DisplayFor(model => model.MANHANVIEN)
+            </dt>
+
+            <dt>
+                Tên Nhân Viên : @Html.DisplayFor(model => model.TENNHANVIEN)
+            </dt>
+
+            <dt>
+                Ngày Sinh : @Html.DisplayFor(model => model.NGAYSINH)
+            </dt>
+
+            <dt>
+                CCCD : @Html.DisplayFor(model => model.CCCD)
+            </dt>
+
+            <dt>
+                Chức Vụ : @Html.DisplayFor(model => model.CHUCVU)
+            </dt>
+
+            <dt>
+                Địa Chỉ : @Html.DisplayFor(model => model.DIACHI)
+            </dt>
+
+            <dt>
+                Email : @Html.DisplayFor(model => model.EMAIL)
+            </dt>
+
+            <dt>
+                SĐT : @Html.DisplayFor(model => model.SDT)
+            </dt>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" /> |
+                <div class="btn btn-info">
+                    @Html.ActionLink("Back", "Index", null, new { style = "color: white;" })
+                </div>
+            </div>
+        }
+    </div>
+</div> 

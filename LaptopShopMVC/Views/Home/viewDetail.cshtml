@@ -1,0 +1,50 @@
+﻿@model LaptopShopMVC.Models.SANPHAM
+
+@{
+    ViewBag.Title = "viewDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="computers_section_2">
+    <div class="container-fluid">
+        <div class="computer_main">
+            <div class="row">
+                <h4 class="computer_text"><a href="">THÔNG TIN SẢN PHẨM</a></h4>
+                <div class="col-md-4">
+                    <div class="computer_img"><img src="@Model.HINH"></div>
+                    <h4 class="computer_text"><a href="">@Model.TENSANPHAM</a></h4>
+                    <div class="computer_text_main">
+                        <h6 class="computer_text"><a>@Model.GIABAN</a></h6>
+                    </div>
+                    <button class="btn btn-danger rounded-0" onclick="addToCart(@Model.MASANPHAM)">Add To Cart</button>
+                </div>
+                <div class="col-md-4">
+                    <h3 class=""><a href="">Tên thương hiệu: @Model.THUONGHIEU.TENTHUONGHIEU</a></h3>
+                    <h3 class=""><a href="">Ram: @Model.RAM GB</a></h3>
+                    <h3 class=""><a href="">Rom: @Model.ROM GB</a></h3>
+                    <h3 class=""><a href="">CPU: @Model.CPU</a></h3>
+                    <h3 class=""><a href="">Card Màn hình: @Model.CARDMANHINH</a></h3>
+                </div>
+                <div class="col-md-4">
+                    <h3 class=""><a href="">Danh mục: @Model.DANHMUC.TENDANHMUC</a></h3>
+                    <h3 class=""><a href="">Xuất xứ: @Model.THUONGHIEU.XUATXU</a></h3>
+                    <h3 class=""><a href="">Mô tả: @Model.MOTA</a></h3>
+                    <h3 class=""><a href="">Thời gian bảo hành: @Model.THOIGIANBAOHANH</a></h3>
+                    <h3 class=""><a href="">Tình Trạng: @Model.TINHTRANG</a></h3>
+                    <a href="#" onclick="history.back(); return false;" class="back-button">Return</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .back-button {
+        display: inline-block;
+        padding: 8px 16px;
+        font-size: 16px;
+        text-decoration: none;
+        color: #fff;
+        background-color: #007bff;
+        border-radius: 4px;
+    }
+</style>

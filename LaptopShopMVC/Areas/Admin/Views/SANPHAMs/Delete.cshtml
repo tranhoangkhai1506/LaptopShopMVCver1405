@@ -1,0 +1,86 @@
+﻿@model LaptopShopMVC.Models.SANPHAM
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<div class="text-center">
+    <h2>Xóa Sản Phẩm</h2>
+    <h3>Bạn có chắc chắn muốn xóa sản phẩm này?</h3>
+    <hr />
+    <dl class="dl-horizontal text-left">
+        <dt>
+            Mã Danh Mục : @Html.DisplayFor(model => model.DANHMUC.MADANHMUC)
+        </dt>
+
+        <dt>
+            Tên Danh Mục : @Html.DisplayFor(model => model.DANHMUC.TENDANHMUC)
+        </dt>
+
+        <dt>
+            Tên Thương Hiệu : @Html.DisplayFor(model => model.THUONGHIEU.TENTHUONGHIEU)
+        </dt>
+
+        <dt>
+            Tên Sản Phẩm : @Html.DisplayFor(model => model.TENSANPHAM)
+        </dt>
+
+        <dt>
+            Mô tả : @Html.DisplayFor(model => model.MOTA)
+        </dt>
+
+        <dt>
+            Hình : @Html.DisplayFor(model => model.HINH)
+        </dt>
+
+        <dt>
+            Ram : @Html.DisplayFor(model => model.RAM)
+        </dt>
+
+        <dt>
+            Rom : @Html.DisplayFor(model => model.ROM)
+        </dt>
+
+        <dt>
+            CPU : @Html.DisplayFor(model => model.CPU)
+        </dt>
+
+        <dt>
+            Card Màn Hình : @Html.DisplayFor(model => model.CARDMANHINH)
+        </dt>
+
+        <dt>
+            Thời Gian Bảo Hành : @Html.DisplayFor(model => model.THOIGIANBAOHANH)
+        </dt>
+
+        <dt>
+            Giá Bán : @Html.DisplayFor(model => model.GIABAN)
+        </dt>
+
+        <dt>
+            Giá Nhập : @Html.DisplayFor(model => model.GIANHAP)
+        </dt>
+
+        <dt>
+            Tình Trạng : @Html.DisplayFor(model => model.TINHTRANG)
+        </dt>
+
+        <dt>
+            Số Lượng : @Html.DisplayFor(model => model.SOLUONG)
+        </dt>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <div class="btn btn-info">
+                @Html.ActionLink("Back", "Index", null, new { style = "color: white;" })
+            </div>
+        </div>
+    }
+</div>

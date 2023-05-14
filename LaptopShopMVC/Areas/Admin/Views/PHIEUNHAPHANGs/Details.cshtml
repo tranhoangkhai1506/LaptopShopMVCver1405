@@ -1,0 +1,42 @@
+﻿@model LaptopShopMVC.Models.PHIEUNHAPHANG
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PHIEUNHAPHANG</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên Nhân Viên
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NHANVIEN.TENNHANVIEN)
+        </dd>
+
+        <dt>
+            Ngày Nhập Hàng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NGAYNHAPHANG)
+        </dd>
+
+        <dt>
+        </dt>Tổng Tiền
+
+        <dd>
+            @Html.DisplayFor(model => model.TONGTIEN)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MAPHIEUNHAPHANG }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

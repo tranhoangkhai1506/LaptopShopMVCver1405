@@ -1,0 +1,107 @@
+﻿@model IEnumerable<LaptopShopMVC.Models.SANPHAM>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<h2 style="text-align:center">Sản Phẩm</h2>
+
+<button class="btn btn-secondary" style="margin: 0 auto; width: 130px">
+    @Html.ActionLink("Create New", "Create", null, new { style = "color: white;" })
+</button>
+
+<br />
+<table class="table" style="text-align:center">
+    <thead class="table-info">
+        <tr>
+            <th>
+                Mã Sản Phẩm
+            </th>
+            <th>
+                Tên Danh Mục
+            </th>
+            <th>
+                Tên Thương Hiệu
+            </th>
+            <th>
+                Tên Sản Phẩm
+            </th>
+            <th>
+                Hình
+            </th>
+            <th>
+                Giá Bán
+            </th>
+            <th>
+                Giá Nhập
+            </th>
+            <th>
+                Tình Trạng
+            </th>
+            <th>
+                Số Lượng
+            </th>
+            <th>
+                Chức Năng
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MASANPHAM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DANHMUC.TENDANHMUC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.THUONGHIEU.TENTHUONGHIEU)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TENSANPHAM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HINH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GIABAN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GIANHAP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TINHTRANG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SOLUONG)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MASANPHAM }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MASANPHAM }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MASANPHAM })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<style>
+    table {
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid black;
+    }
+
+    .table {
+        width: 95%;
+        margin: 0 auto;
+    }
+
+        .table tr:hover {
+            background-color: #f5f5f5;
+        }
+</style>

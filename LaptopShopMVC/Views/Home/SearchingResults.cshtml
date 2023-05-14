@@ -1,0 +1,58 @@
+﻿@model IEnumerable<LaptopShopMVC.Models.SANPHAM>
+
+@{
+    ViewBag.Title = "SearchingResults";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="computers_section layout_padding">
+    <div class="container">
+        <h1 class="computers_taital">THÔNG TIN SẢN PHẨM PHÙ HỢP</h1>
+    </div>
+</div>
+@{
+    <div class="computers_section_2">
+        <div class="container-fluid">
+            <div class="computer_main">
+                <div class="row">
+                    @{foreach (var i in Model)
+                        {
+                            <div class="col-md-4">
+                                <div class="computer_img"><img src="@i.HINH"></div>
+                                <h4 class="computer_text"><a href="@Url.Action("viewDetail",new {maSanPham = @i.MASANPHAM })">@i.TENSANPHAM</a></h4>
+                                <div class="computer_text_main">
+                                    <h6 class="dell_text"><a>@i.GIABAN</a></h6>
+                                    <h6 class="price_text"><a>@i.GIANHAP</a></h6>
+                                </div>
+                                <button class="btn btn-danger rounded-0" onclick="addToCart(@i.MASANPHAM)">Add To Cart</button>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="computers_section_2">
+        <div class="container-fluid">
+            <div class="computer_main">
+                <div class="row">
+                    @{foreach (var i in Model)
+                        {
+                            <div class="col-md-4">
+                                <div class="computer_img"><img src="@i.HINH"></div>
+                                <h4 class="computer_text"><a href="@Url.Action("viewDetail",new {maSanPham = @i.MASANPHAM })">@i.TENSANPHAM</a></h4>
+                                <div class="computer_text_main">
+                                    <h6 class="dell_text"><a>@i.GIABAN</a></h6>
+                                    <h6 class="price_text"><a>@i.GIANHAP</a></h6>
+                                </div>
+                                <button class="btn btn-danger rounded-0" onclick="addToCart(@i.MASANPHAM)">Add To Cart</button>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}

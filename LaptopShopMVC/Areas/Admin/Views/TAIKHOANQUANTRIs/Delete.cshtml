@@ -1,0 +1,42 @@
+﻿@model LaptopShopMVC.Models.TAIKHOANQUANTRI
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<div style="text-align:center">
+    <h2>Xóa Tài Khoản</h2>
+    <h3>Bạn có chắc chắn muốn xóa tài khoản này?</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên Đăng Nhập  : @Html.DisplayFor(model => model.TENDANGNHAP)
+        </dt>
+
+        <dt>
+            Mật Khẩu : @Html.DisplayFor(model => model.MATKHAU)
+        </dt>
+
+        <dt>
+            Tên Nhân Viên : @Html.DisplayFor(model => model.NHANVIEN.TENNHANVIEN)
+        </dt>
+
+        <dt>
+            Tên Phân Quyền : @Html.DisplayFor(model => model.PHANQUYEN.TENPHANQUYEN)
+        </dt>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <div class="btn btn-info">
+                @Html.ActionLink("Back", "Index", null, new { style = "color: white;" })
+            </div>
+        </div>
+    }
+</div>

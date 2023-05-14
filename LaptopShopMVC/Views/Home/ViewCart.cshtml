@@ -1,0 +1,47 @@
+﻿@model IEnumerable<LaptopShopMVC.Extras.ViewCart>
+@{
+    int count = 0;
+    string FINAL_TOTAL = "";
+    ViewBag.Title = "ViewCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Tên Sản Phẩm</th>
+            <th>Hình</th>
+            <th>Giá Bán</th>
+            <th>Số Lượng</th>
+            <th>Tổng Tiền</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MASANPHAM</td>
+                <td>@item.TENSANPHAM</td>
+                <td><img src="~/images/@item.HINH" /></td>
+                <td>@item.GIABAN</td>
+                <td>
+                    <span class="h2" onclick="themSoLuong_cart_soLuong(@item.MASANPHAM,@count)" style="cursor:pointer"> + </span>
+                    <h2 class="inc_count">@item.SOLUONG</h2>
+                    <span class="h2" onclick="giamSoLuong_cart_soLuong(@item.MASANPHAM,@count)" style="cursor:pointer"> - </span>
+                </td>
+                <td>@item.TONGTIEN</td>
+
+            </tr>
+            count++;
+            FINAL_TOTAL = FINAL_TOTAL + Convert.ToDouble(item.TONGTIEN);
+        }
+    </tbody>
+</table>
+
+<style>
+    td, th {
+        border: 1px solid black;
+    }
+</style>

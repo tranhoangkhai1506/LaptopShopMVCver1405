@@ -1,0 +1,81 @@
+﻿@model IEnumerable<LaptopShopMVC.Models.KHACHHANG>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<h2 style="text-align:center">Khách Hàng</h2>
+
+<button class="btn btn-secondary" style="margin: 0 auto; width: 130px">
+    @Html.ActionLink("Create New", "Create", null, new { style = "color: white;" })
+</button>
+<br />
+<table class="datatable-container" style="text-align:center">
+    <tr>
+        <th>
+            Tên Khách Hàng
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            CCCD
+        </th>
+        <th>
+            Ngày Sinh
+        </th>
+        <th>
+            Địa Chỉ
+        </th>
+        <th>
+            Số Điện Thoại
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TENKHACHHANG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMAIL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CCCD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NGAYSINH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DIACHI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SDT)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MAKHACHHANG }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MAKHACHHANG }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MAKHACHHANG })
+            </td>
+        </tr>
+    }
+</table>
+<style>
+    .datatable-container {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid black;
+    }
+</style>

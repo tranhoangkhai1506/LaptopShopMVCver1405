@@ -1,0 +1,27 @@
+﻿@model LaptopShopMVC.Models.THUONGHIEU
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+<button class="btn btn-info" style="width: 120px">
+    @Html.ActionLink("Back", "Index")
+</button>
+
+<div style="text-align:center">
+    <h2>Chi Tiết Thương Hiệu</h2>
+
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Tên Thương Hiệu : @Html.DisplayFor(model => model.TENTHUONGHIEU)
+            </dt>
+
+            <dt>
+                Xuất Xứ : @Html.DisplayFor(model => model.XUATXU)
+            </dt>
+
+        </dl>
+    </div>
+</div>

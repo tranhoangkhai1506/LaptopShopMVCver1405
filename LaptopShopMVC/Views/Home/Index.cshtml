@@ -1,0 +1,59 @@
+﻿@model IEnumerable<LaptopShopMVC.Models.SANPHAM>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+
+    LaptopShopMVC.Models.LaptopDBContext db = new LaptopShopMVC.Models.LaptopDBContext();
+    var thuongHieu = db.THUONGHIEUx.ToList();
+
+    foreach (var i in thuongHieu)
+    {
+        <div class="computers_section layout_padding">
+            <div class="container">
+                <h1 class="computers_taital">@i.TENTHUONGHIEU</h1>
+            </div>
+        </div>
+        <div class="computers_section_2">
+            <div class="container-fluid">
+                <div class="computer_main">
+                    <div class="row">
+                        @{
+                            var listSP = db.SANPHAMs.Where(p => p.MATHUONGHIEU == i.MATHUONGHIEU).ToList();
+                            if (listSP != null)
+                            {
+                                foreach (var item in listSP)
+                                {
+                                    <div class="col-md-4">
+                                        <div class="computer_img"><img src="@item.HINH"></div>
+                                        <h4 class="computer_text"><a href="@Url.Action("viewDetail",new {maSanPham = @item.MASANPHAM })">@item.TENSANPHAM</a></h4>
+                                        <div class="computer_text_main">
+                                            <h6 class="dell_text"><a>@item.GIABAN</a></h6>
+                                            <h6 class="price_text"><a>@item.GIANHAP</a></h6>
+                                        </div>
+                                        <button class="btn btn-danger rounded-0" onclick="addToCart(@item.MASANPHAM)">Add To Cart</button>
+                                    </div>
+
+                                }
+                            }
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+}
+else
+{
+    <a href="@Url.Action("Login", "Account")">Log in</a>
+}
+
+

@@ -1,0 +1,40 @@
+﻿@model LaptopShopMVC.Models.PHANQUYEN
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+
+<div style="text-align:center">
+    <h2>Xóa Phân Quyền</h2>
+    <h3>Bạn có chắc chắn muốn xóa phân quyền này?</h3>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Mã Phâm Quyền : @Html.DisplayFor(model => model.MAPHANQUYEN)
+        </dt>
+
+        <dt>
+            Tên Phâm Quyền : @Html.DisplayFor(model => model.TENPHANQUYEN)
+        </dt>
+
+        <dt>
+            Quyền Hạn : @Html.DisplayFor(model => model.QUYENHAN)
+        </dt>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <div class="btn btn-info">
+                @Html.ActionLink("Back", "Index", null, new { style = "color: white;" })
+            </div>
+        </div>
+    }
+</div>

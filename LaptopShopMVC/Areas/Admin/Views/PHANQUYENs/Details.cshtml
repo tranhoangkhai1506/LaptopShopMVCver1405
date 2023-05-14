@@ -1,0 +1,31 @@
+﻿@model LaptopShopMVC.Models.PHANQUYEN
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+<button class="btn btn-info" style="width: 120px">
+    @Html.ActionLink("Back", "Index")
+</button>
+
+<div style="text-align:center">
+    <div>
+        <h2>Chi Tiết Phân Quyền</h2>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Mã Phân Quyền :@Html.DisplayFor(model => model.MAPHANQUYEN)
+            </dt>
+
+            <dt>
+                Tên Phân Quyền :@Html.DisplayFor(model => model.TENPHANQUYEN)
+            </dt>
+
+            <dt>
+                Quyền Hạn : @Html.DisplayFor(model => model.QUYENHAN)
+            </dt>
+
+        </dl>
+    </div>
+
+</div>

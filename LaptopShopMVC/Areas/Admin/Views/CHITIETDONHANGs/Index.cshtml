@@ -1,0 +1,70 @@
+﻿@model IEnumerable<LaptopShopMVC.Models.CHITIETDONHANG>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+
+<h2 style="text-align:center">Chi Tiết Đơn Hàng</h2>
+
+<button class="btn btn-secondary" style="margin: 0 auto; width: 130px">
+    @Html.ActionLink("Create New", "Create", null, new { style = "color: white;" })
+</button>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            Mã Hóa Đơn
+        </th>
+        <th>
+            Tên Sản Phẩm
+        </th>
+        <th>
+            Số Lượng
+        </th>
+        <th>
+            Giá
+        </th>
+        <th>
+            Ngày Lập
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DONHANG.MADONHANG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SANPHAM.TENSANPHAM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SOLUONG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GIA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NGAYLAP)
+            </td>
+
+        </tr>
+    }
+
+</table>
+<style>
+    .datatable-container {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid black;
+    }
+</style>

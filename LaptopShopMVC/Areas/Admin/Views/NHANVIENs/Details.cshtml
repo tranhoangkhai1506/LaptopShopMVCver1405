@@ -1,0 +1,61 @@
+﻿@model LaptopShopMVC.Models.NHANVIEN
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+<button class="btn btn-info" style="width: 120px">
+    @Html.ActionLink("Back", "Index")
+</button>
+
+<h2 style="text-align:center">Chi Tiết Nhân Viên</h2>
+
+<div class="row">
+    <div class="col-sm-6">
+        <hr />
+        <h3 style="text-align:center">Thông Tin</h3>
+        <dl class="dl-horizontal" style="text-align:center">
+            <dt>
+                Mã Nhân Viên : @Html.DisplayFor(model => model.MANHANVIEN)
+            </dt>
+
+            <dt>
+                Tên Nhân Viên : @Html.DisplayFor(model => model.TENNHANVIEN)
+            </dt>
+
+            <dt>
+                Ngày Sinh : @Html.DisplayFor(model => model.NGAYSINH)
+            </dt>
+
+            <dt>
+                CCCD : @Html.DisplayFor(model => model.CCCD)
+            </dt>
+
+            <dt>
+                Chức Vụ : @Html.DisplayFor(model => model.CHUCVU)
+            </dt>
+
+            <dt>
+                Địa Chỉ : @Html.DisplayFor(model => model.DIACHI)
+            </dt>
+
+            <dt>
+                Email : @Html.DisplayFor(model => model.EMAIL)
+            </dt>
+
+            <dt>
+                SĐT : @Html.DisplayFor(model => model.SDT)
+            </dt>
+
+        </dl>
+    </div>
+    <div class="col-sm-6" style="text-align:center">
+        <hr />
+        <h3>Hình Ảnh</h3>
+        <div width="600" height="370">
+            <img src="@Html.DisplayFor(model => model.HINH)" width="163" height="165" />
+
+        </div>
+    </div>
+</div>
+

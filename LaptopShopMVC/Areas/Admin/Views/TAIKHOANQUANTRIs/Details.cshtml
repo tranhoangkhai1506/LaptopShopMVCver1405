@@ -1,0 +1,35 @@
+﻿@model LaptopShopMVC.Models.TAIKHOANQUANTRI
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<button class="btn btn-info" style="width: 120px">
+    @Html.ActionLink("Back", "Index")
+</button>
+
+<div style="text-align:center">
+    <div>
+        <h2>Chi Tiết Thông Tin Tài Khoản</h2>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Tên Đăng Nhập  : @Html.DisplayFor(model => model.TENDANGNHAP)
+            </dt>
+
+            <dt>
+                Mật Khẩu : @Html.DisplayFor(model => model.MATKHAU)
+            </dt>
+
+            <dt>
+                Tên Nhân Viên : @Html.DisplayFor(model => model.NHANVIEN.TENNHANVIEN)
+            </dt>
+
+            <dt>
+                Tên Phân Quyền : @Html.DisplayFor(model => model.PHANQUYEN.TENPHANQUYEN)
+            </dt>
+        </dl>
+    </div>
+</div>
+

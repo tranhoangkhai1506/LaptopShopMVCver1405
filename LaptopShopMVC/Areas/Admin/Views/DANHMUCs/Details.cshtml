@@ -1,0 +1,27 @@
+﻿@model LaptopShopMVC.Models.DANHMUC
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+<button class="btn btn-info" style="width: 120px">
+    @Html.ActionLink("Back", "Index")
+</button>
+
+<div style="text-align:center">
+    <h2>Chi Tiết Danh Mục Sản Phẩm </h2>
+
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Mã Danh Mục: @Html.DisplayFor(model => model.MADANHMUC)
+            </dt>
+
+            <dt>
+                Tên Danh Mục: @Html.DisplayFor(model => model.TENDANHMUC)
+            </dt>
+
+        </dl>
+    </div>
+</div>

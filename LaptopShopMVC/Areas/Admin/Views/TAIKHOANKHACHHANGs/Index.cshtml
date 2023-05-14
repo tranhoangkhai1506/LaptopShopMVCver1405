@@ -1,0 +1,62 @@
+﻿@model IEnumerable<LaptopShopMVC.Models.TAIKHOANKHACHHANG>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<h2 style="text-align:center">Tài Khoản Khách Hàng</h2>
+
+<button class="btn btn-secondary" style="margin: 0 auto; width: 130px">
+    @Html.ActionLink("Create New", "Create", null, new { style = "color: white;" })
+</button>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            Tên Khách Hàng
+        </th>
+        <th>
+            Tên Đăng Nhập
+        </th>
+        <th>
+            Mật Khẩu
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.KHACHHANG.TENKHACHHANG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TENDANGNHAP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MATKHAU)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TENDANGNHAP }) |
+                @Html.ActionLink("Details", "Details", new { id = item.TENDANGNHAP }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TENDANGNHAP })
+            </td>
+        </tr>
+    }
+
+</table>
+<style>
+    .datatable-container {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid black;
+    }
+</style>
