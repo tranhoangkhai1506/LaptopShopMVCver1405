@@ -9,17 +9,14 @@
     <div class="container-fluid">
         <div class="computer_main">
             <div class="row">
-                <h4 class="computer_text"><a href="">THÔNG TIN SẢN PHẨM</a></h4>
+                <h3 class="computer_text"><a href="">THÔNG TIN SẢN PHẨM</a></h3>
                 <div class="col-md-4">
                     <div class="computer_img"><img src="@Model.HINH"></div>
                     <h4 class="computer_text"><a href="">@Model.TENSANPHAM</a></h4>
-                    <div class="computer_text_main">
-                        <h6 class="computer_text"><a>@Model.GIABAN</a></h6>
-                    </div>
-                    <button class="btn btn-danger rounded-0" onclick="addToCart(@Model.MASANPHAM)">Add To Cart</button>
+                    <h6 class="computer_text"><a>@Model.GIABAN VNĐ</a></h6>
                 </div>
                 <div class="col-md-4">
-                    <h3 class=""><a href="">Tên thương hiệu: @Model.THUONGHIEU.TENTHUONGHIEU</a></h3>
+                    <h3 class=""><a href="">Thương hiệu: @Model.THUONGHIEU.TENTHUONGHIEU</a></h3>
                     <h3 class=""><a href="">Ram: @Model.RAM GB</a></h3>
                     <h3 class=""><a href="">Rom: @Model.ROM GB</a></h3>
                     <h3 class=""><a href="">CPU: @Model.CPU</a></h3>
@@ -31,12 +28,16 @@
                     <h3 class=""><a href="">Mô tả: @Model.MOTA</a></h3>
                     <h3 class=""><a href="">Thời gian bảo hành: @Model.THOIGIANBAOHANH</a></h3>
                     <h3 class=""><a href="">Tình Trạng: @Model.TINHTRANG</a></h3>
-                    <a href="#" onclick="history.back(); return false;" class="back-button">Return</a>
+                    <button class="btn btn-danger rounded-0" onclick="addToCart(@Model.MASANPHAM)">Add To Cart</button>
+
+                    <a href="#" onclick="history.back(); return false;" class="btn btn-success rounded-0">Return</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 <style>
     .back-button {
         display: inline-block;

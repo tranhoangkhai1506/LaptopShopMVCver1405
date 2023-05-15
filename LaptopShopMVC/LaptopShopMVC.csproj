@@ -385,6 +385,7 @@
     <Content Include="Views\Account\Nhaptaikhoankhachhang.cshtml" />
     <Content Include="Views\Account\Nhapkhachhang.cshtml" />
     <Content Include="Views\Home\ViewCart.cshtml" />
+    <Content Include="Views\Home\viewAllProductOfBrand.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

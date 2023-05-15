@@ -115,6 +115,16 @@ namespace LaptopShopMVC.Controllers
 
         }
 
+        public ActionResult viewAllProductOfBrand(string tenThuongHieu)
+        {
+            var listSanPham = context.SANPHAMs.Where(p => p.THUONGHIEU.TENTHUONGHIEU.Contains(tenThuongHieu)).ToList();
+            if (listSanPham.Count() != 0)
+            {
+                return View(listSanPham);
+            }
+            return RedirectToAction("errorResult");
+        }
+
         public ActionResult viewDetail(int maSanPham)
         {
             var sanPham = context.SANPHAMs.FirstOrDefault(p => p.MASANPHAM == maSanPham);
@@ -191,21 +201,26 @@ namespace LaptopShopMVC.Controllers
         {
             List<cart> mainlist = (List<cart>)Session["cart"];
             List<ViewCart> viewlist = new List<ViewCart>();
-            foreach (var item in mainlist)
+
+            if (mainlist != null)
             {
-                ViewCart obj = new ViewCart();
-                SANPHAM sanPham = context.SANPHAMs.Where(p => p.MASANPHAM == item.maSanPham).FirstOrDefault();
-                obj.MASANPHAM = sanPham.MASANPHAM;
-                obj.TENSANPHAM = sanPham.TENSANPHAM;
-                obj.SOLUONG = item.soLuong;
-                obj.HINH = sanPham.HINH;
-                obj.GIABAN = sanPham.GIABAN;
-                obj.TONGTIEN = Convert.ToString(item.soLuong * Convert.ToDouble(sanPham.GIABAN));
+                foreach (var item in mainlist)
+                {
+                    ViewCart obj = new ViewCart();
+                    SANPHAM sanPham = context.SANPHAMs.Where(p => p.MASANPHAM == item.maSanPham).FirstOrDefault();
+                    obj.MASANPHAM = sanPham.MASANPHAM;
+                    obj.TENSANPHAM = sanPham.TENSANPHAM;
+                    obj.SOLUONG = item.soLuong;
+                    obj.HINH = sanPham.HINH;
+                    obj.GIABAN = sanPham.GIABAN;
+                    obj.TONGTIEN = Convert.ToString(item.soLuong * Convert.ToDouble(sanPham.GIABAN));
 
-                viewlist.Add(obj);
+                    viewlist.Add(obj);
+                }
+                return View(viewlist);
             }
+            return RedirectToAction("errorResult");
 
-            return View(viewlist);
         }
 
         public ActionResult themSoLuong_cart(int id)
@@ -256,6 +271,7 @@ namespace LaptopShopMVC.Controllers
 
             return Json(soLuong, JsonRequestBehavior.AllowGet);
         }
+
     }
 
 }
