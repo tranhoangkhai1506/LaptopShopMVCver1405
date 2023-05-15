@@ -6,9 +6,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (User.Identity.IsAuthenticated)
-{
 
+@{
     LaptopShopMVC.Models.LaptopDBContext db = new LaptopShopMVC.Models.LaptopDBContext();
     var thuongHieu = db.THUONGHIEUx.ToList();
 
@@ -91,11 +90,8 @@
         </div>
     </div>
 
+}
 
-}
-else
-{
-    <a href="@Url.Action("Login", "Account")">Log in</a>
-}
+
 
 

@@ -113,7 +113,6 @@ namespace LaptopShopMVC.Controllers
             String matkhau = collection["MATKHAU"];
 
 
-
             if (cccd_khachhang != "")
             {
                 var khachHangTaoTaiKhoan = context.KHACHHANGs.FirstOrDefault(p => p.CCCD.Contains(cccd_khachhang));

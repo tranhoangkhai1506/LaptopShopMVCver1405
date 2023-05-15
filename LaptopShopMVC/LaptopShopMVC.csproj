@@ -375,17 +375,16 @@
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
-    <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Home\Searching.cshtml" />
     <Content Include="Views\Home\SearchingResults.cshtml" />
     <Content Include="Views\Home\errorResult.cshtml" />
     <Content Include="Views\Home\viewDetail.cshtml" />
     <Content Include="Views\Shared\_empty.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Nhaptaikhoankhachhang.cshtml" />
-    <Content Include="Views\Account\Nhapkhachhang.cshtml" />
     <Content Include="Views\Home\ViewCart.cshtml" />
     <Content Include="Views\Home\viewAllProductOfBrand.cshtml" />
+    <Content Include="Views\Account\Nhapkhachhang.cshtml" />
+    <Content Include="Views\Account\Nhaptaikhoankhachhang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

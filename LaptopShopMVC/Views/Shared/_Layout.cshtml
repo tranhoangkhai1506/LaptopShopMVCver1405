@@ -91,7 +91,12 @@
                             }
                             else
                             {
-
+                                List<LaptopShopMVC.Extras.cart> mainlist = (List<LaptopShopMVC.Extras.cart>)Session["cart"];
+                                int soLuong = 0;
+                                if (mainlist != null)
+                                {
+                                    soLuong = mainlist.Count();
+                                }
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="~/images/user-icon.png"></a>
                                     <ul class="dropdown-menu">
@@ -99,10 +104,7 @@
                                         <li><a href="@Url.Action("Login", "Account")">Sign In</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#"><img src="~/images/trolly-icon.png"></a></li>
-
-                                <li><a href="@Url.Action("Login", "Account")"><img src="~/images/user-icon.png"></a></li>
-                                <li><a href="@Url.Action("ViewCart", "Home")"><img src="~/images/trolly-icon.png"></a></li>
+                                <li><a href="@Url.Action("ViewCart", "Home")"><img src="~/images/trolly-icon.png" /></a><span class="h4 text-dark" id="count">@soLuong</span></li>
 
                                 <li><a href="@Url.Action("Searching", "Home")"><img src="~/images/search-icon.png"></a></li>
                             }

@@ -13,7 +13,8 @@ namespace LaptopShopMVC.Controllers
     public class HomeController : Controller
     {
         LaptopDBContext context = new LaptopDBContext();
-        [Authorize]
+
+
         public ActionResult Index()
         {
             var listSanPham = context.SANPHAMs.ToList();
