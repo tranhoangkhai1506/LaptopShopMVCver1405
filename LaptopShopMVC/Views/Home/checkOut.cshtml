@@ -1,0 +1,120 @@
+﻿@model LaptopShopMVC.Models.KHACHHANG
+
+@{
+    ViewBag.Title = "checkOut";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string TongTien = "0.00";
+
+}
+
+@{
+    var context = new LaptopShopMVC.Models.LaptopDBContext();
+    List<LaptopShopMVC.Extras.cart> mainlist = (List<LaptopShopMVC.Extras.cart>)Session["cart"];
+    List<LaptopShopMVC.Extras.ViewCart> viewlist = new List<LaptopShopMVC.Extras.ViewCart>();
+
+    if (mainlist != null)
+    {
+        foreach (var item in mainlist)
+        {
+            LaptopShopMVC.Extras.ViewCart obj = new LaptopShopMVC.Extras.ViewCart();
+            LaptopShopMVC.Models.SANPHAM sanPham = context.SANPHAMs.Where(p => p.MASANPHAM == item.maSanPham).FirstOrDefault();
+            obj.MASANPHAM = sanPham.MASANPHAM;
+            obj.TENSANPHAM = sanPham.TENSANPHAM;
+            obj.SOLUONG = item.soLuong;
+            obj.HINH = sanPham.HINH;
+            obj.GIABAN = sanPham.GIABAN;
+            obj.TONGTIEN = Convert.ToString(item.soLuong * Convert.ToDouble(sanPham.GIABAN));
+
+            viewlist.Add(obj);
+        }
+    }
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Tên Sản Phẩm</th>
+                <th>Hình</th>
+                <th>Giá Bán</th>
+                <th>Số Lượng</th>
+                <th>Tổng Tiền</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in viewlist)
+            {
+                <tr>
+                    <td>@item.MASANPHAM</td>
+                    <td>@item.TENSANPHAM</td>
+                    <td><img src="~/images/@item.HINH" /></td>
+                    <td>@item.GIABAN</td>
+                    <td>@item.TONGTIEN</td>
+                </tr>
+                TongTien = Convert.ToString(Convert.ToDouble(TongTien) + Convert.ToDouble(item.TONGTIEN));
+            }
+            <tr>
+                <td colpan="5"></td>
+                <td>Tổng Tiền : </td>
+                <td>@TongTien</td>
+            </tr>
+
+
+        </tbody>
+    </table>
+}
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TENKHACHHANG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TENKHACHHANG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EMAIL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EMAIL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CCCD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CCCD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NGAYSINH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NGAYSINH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIACHI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIACHI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SDT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SDT)
+        </dd>
+
+    </dl>
+</div>
+<td><a href="@Url.Action("order", "Home")">Đặt Hàng</a> </td>

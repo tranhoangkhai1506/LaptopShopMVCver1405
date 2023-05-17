@@ -7,13 +7,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using LaptopShopMVC.Extras;
+using System.Runtime.ConstrainedExecution;
+using System.Data.Entity.Migrations;
 
 namespace LaptopShopMVC.Controllers
 {
     public class HomeController : Controller
     {
         LaptopDBContext context = new LaptopDBContext();
-
 
         public ActionResult Index()
         {
@@ -160,29 +161,19 @@ namespace LaptopShopMVC.Controllers
             if (Session["cart"] != null)
             {
                 List<cart> mainlist = (List<cart>)Session["cart"];
-                int check = 0;
-                foreach (var item in mainlist)
+                cart productInCart = mainlist.FirstOrDefault(p => p.maSanPham == id);
+                
+                if(productInCart != null)
                 {
-                    if (item.maSanPham == id)
-                    {
-                        item.soLuong = item.soLuong + 1;
-                        check = 0;
-                        break;
-                    }
-                    else
-                    {
-                        check = 1;
-                    }
+                    productInCart.soLuong += 1;
                 }
-                if (check == 1)
+                else 
                 {
                     cart obj = new cart();
                     obj.maSanPham = id;
                     obj.soLuong = 1;
                     mainlist.Add(obj);
                 }
-                 
-
                 Session["cart"] = (List<cart>) mainlist;
             }
             else
@@ -274,10 +265,13 @@ namespace LaptopShopMVC.Controllers
         {
             List<cart> mainlist = (List<cart>)Session["cart"];
 
-            cart cartItemToRemove = mainlist.FirstOrDefault(item => item.maSanPham == id);
-            if (cartItemToRemove != null)
+            if (mainlist.Count() != 0)
             {
-                mainlist.RemoveAll(item => item.maSanPham == id);
+                cart cartItemToRemove = mainlist.FirstOrDefault(item => item.maSanPham == id);
+                if (cartItemToRemove != null)
+                {
+                    mainlist.RemoveAll(item => item.maSanPham == id);
+                } 
             }
 
             Session["cart"] = (List<cart>)mainlist;
@@ -285,6 +279,124 @@ namespace LaptopShopMVC.Controllers
             return Json(mainlist, JsonRequestBehavior.AllowGet);
         }
 
+        [Auth]
+        public ActionResult checkOut()
+        {
+            string tenDangNhap = User.Identity.Name;
+            KHACHHANG khachHang;
+            if (tenDangNhap != null)
+            {
+                TAIKHOANKHACHHANG taiKhoanKH = context.TAIKHOANKHACHHANGs.FirstOrDefault(p => p.TENDANGNHAP.Contains(tenDangNhap));
+                if (taiKhoanKH != null)
+                {
+                    khachHang = taiKhoanKH.KHACHHANG;
+                    return this.View(khachHang);
+                }
+                else
+                {
+                    return RedirectToAction("errorResult");
+                }
+            }
+            return RedirectToAction("errorResult");
+
+        }
+        public List<ViewCart> sessionToCart()
+        {
+            List<cart> cartSession = (List<cart>)Session["cart"];
+            List<ViewCart> listCart = new List<ViewCart>();
+
+            if (cartSession != null)
+            {
+                foreach(var cart in cartSession)
+                {
+                    ViewCart obj = new ViewCart();
+                    SANPHAM sanPham = context.SANPHAMs.FirstOrDefault(p => p.MASANPHAM == cart.maSanPham);
+                    obj.MASANPHAM = sanPham.MASANPHAM;
+                    obj.TENSANPHAM = sanPham.TENSANPHAM;
+                    obj.HINH = sanPham.HINH;
+                    obj.GIABAN = sanPham.GIABAN;
+                    obj.SOLUONG = cart.soLuong;
+                    obj.TONGTIEN = Convert.ToString(cart.soLuong * Convert.ToDouble(sanPham.GIABAN));
+
+                    listCart.Add(obj);
+                }
+            }
+            return listCart;
+
+        }
+
+        public void creataPhieuBaoHanh(int maSanPham)
+        {
+            TAIKHOANKHACHHANG taiKhoanKH = context.TAIKHOANKHACHHANGs.FirstOrDefault(p => p.TENDANGNHAP.Contains(User.Identity.Name));
+            SANPHAM sanPham = context.SANPHAMs.FirstOrDefault(p => p.MASANPHAM == maSanPham);
+
+            PHIEUBAOHANH newPBH = new PHIEUBAOHANH();
+
+            newPBH.MAKHACHHANG = taiKhoanKH.KHACHHANG.MAKHACHHANG;
+            newPBH.MASANPHAM = sanPham.MASANPHAM;
+            newPBH.NGAYBATDAU = DateTime.Now;
+            DateTime ngayHienTai = DateTime.Now;
+            int soThangCach = 6; // Số tháng cần cách
+
+            DateTime ngayCach = ngayHienTai.AddMonths(soThangCach);
+            newPBH.NGAYKETTHUC = ngayCach;
+
+            context.PHIEUBAOHANHs.AddOrUpdate(newPBH);
+            context.SaveChanges();
+
+        }
+
+        public void creataCTDH(int maDonHang)
+        {
+            List<ViewCart> listGioHang = sessionToCart();
+            TAIKHOANKHACHHANG taiKhoanKH = context.TAIKHOANKHACHHANGs.FirstOrDefault(p => p.TENDANGNHAP.Contains(User.Identity.Name));
+
+            var maDonHangtoChiTiet = context.DONHANGs.FirstOrDefault(p => p.MADONHANG == maDonHang);
+            if (maDonHangtoChiTiet != null)
+            {
+                foreach (var item in listGioHang)
+                {
+                    CHITIETDONHANG newChiTietDonHang = new CHITIETDONHANG();
+                    newChiTietDonHang.MADONHANG = maDonHangtoChiTiet.MADONHANG;
+                    newChiTietDonHang.MASANPHAM = item.MASANPHAM;
+                    newChiTietDonHang.SOLUONG = Convert.ToInt16(item.SOLUONG);
+                    newChiTietDonHang.GIA = Convert.ToDecimal(item.TONGTIEN);
+                    newChiTietDonHang.NGAYLAP = DateTime.Now;
+                    context.CHITIETDONHANGs.Add(newChiTietDonHang);
+                    context.SaveChanges();
+
+                    creataPhieuBaoHanh(newChiTietDonHang.MASANPHAM);
+
+                }
+                decimal TongTien = listGioHang
+                        .GroupBy(p => p.MASANPHAM) // Group the items by MASANPHAM
+                        .OrderBy(p => p.Key) // Order the groups by MASANPHAM
+                        .Sum(p => p.Sum(x => decimal.Parse(x.TONGTIEN))); // Calculate the sum of TongTien for each group
+
+                maDonHangtoChiTiet.TONGTIEN = TongTien;
+                context.SaveChanges();
+            }
+        }
+
+        public ActionResult order()
+        {
+            TAIKHOANKHACHHANG taiKhoanKH = context.TAIKHOANKHACHHANGs.FirstOrDefault(p => p.TENDANGNHAP.Contains(User.Identity.Name));
+            
+            if (taiKhoanKH != null)
+            {
+                DONHANG newDonHang = new DONHANG();
+                newDonHang.MAKHACHHANG = taiKhoanKH.KHACHHANG.MAKHACHHANG;
+                newDonHang.MANHANVIEN = 1;
+                newDonHang.NGAYTHANHTOAN = DateTime.Now;
+                context.DONHANGs.Add(newDonHang); 
+                context.SaveChanges();
+
+                creataCTDH(newDonHang.MADONHANG);
+            }
+
+
+            return this.View();
+        }
     }
 
 }

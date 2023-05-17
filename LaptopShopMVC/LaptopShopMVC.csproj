@@ -385,6 +385,8 @@
     <Content Include="Views\Home\viewAllProductOfBrand.cshtml" />
     <Content Include="Views\Account\Nhapkhachhang.cshtml" />
     <Content Include="Views\Account\Nhaptaikhoankhachhang.cshtml" />
+    <Content Include="Views\Home\checkOut.cshtml" />
+    <Content Include="Views\Home\order.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
