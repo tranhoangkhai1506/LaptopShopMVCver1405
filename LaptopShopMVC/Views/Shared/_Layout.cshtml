@@ -115,13 +115,12 @@
         </div>
     </div>
     <!-- header section end -->
-
     <!-- catagary section start -->
     <div class="catagary_section layout_padding">
         <div class="container">
             <div class="catagary_main">
                 <div class="catagary">
-                    <div class="catagary_menu" >
+                    <div class="catagary_menu">
                         <ul>
                             <li><a href="@Url.Action("viewAllProductOfBrand", "Home", new {tenThuongHieu = "APPLE"})">Apple</a></li>
                             <li><a href="@Url.Action("viewAllProductOfBrand", "Home", new {tenThuongHieu = "Asus"})">Asus</a></li>
@@ -243,6 +242,43 @@
             );
         }
 
+        @*function removeToCart() {
+            var maSanPham = $(this).data('id');
+            $.ajax({
+                url: '@Url.Action("RemoveToCart", "Cart")',
+                type: 'POST',
+                data: { maSanPham: maSanPham },
+                success: function (result) {
+                    if (result.success) {
+                        $('.cart .maSanPham').filter(function () {
+                            return $(this).text() === maSanPham;
+                        }).closest('.cart').remove();
+                    } else {
+                        alert(result.message);
+                    }
+                },
+                error: function () {
+                    alert('Đã xảy ra lỗi')
+                }
+            });
+        }*@
+
+        function removeToCart(MASANPHAM) {
+            $.ajax(
+                {
+                    url: "@Url.Action("RemoveToCart", "Home")",
+                    type: "POST",
+                    data: { id: MASANPHAM },
+                    dataType: "json",
+                    success: function (res) {
+                        console.log(res)
+                        window.location.reload();
+                    }
+                }
+            );
+        }
+
+
         function themSoLuong_cart_soLuong(MASANPHAM,index) {
             $.ajax(
                 {
@@ -278,7 +314,26 @@
             );
 
         }
+
+        @*$(function () {
+            $('.RemoveLink').click(function () {
+                $.ajax({
+                    url: "@Url.Action("RemoveToCart", "Home")",
+                    data: { id: $(this).data('id') },
+                    cache: false,
+                    success: function (res) {
+                        document.getElementById("count").innerHTML = res.length;
+                        window.location.reload();
+                    }
+                });
+                return false;
+            });
+        });*@
     </script>
+
+
+
+
 
 </body>
 </html>

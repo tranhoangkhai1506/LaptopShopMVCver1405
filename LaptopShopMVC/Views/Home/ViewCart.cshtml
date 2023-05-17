@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<LaptopShopMVC.Extras.ViewCart>
 @{
     int count = 0;
-    string FINAL_TOTAL = "";
+    string TongTien = "0.00";
     ViewBag.Title = "ViewCart";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -32,19 +32,23 @@
                         <span class="h2" onclick="giamSoLuong_cart_soLuong(@item.MASANPHAM,@count)" style="cursor:pointer"> - </span>
                     </td>
                     <td>@item.TONGTIEN</td>
+                    <td><a href="#" onclick="removeToCart(@item.MASANPHAM)">Remove</a></td>
 
                 </tr>
                 count++;
-                FINAL_TOTAL = FINAL_TOTAL + Convert.ToDouble(item.TONGTIEN);
+                TongTien = Convert.ToString(Convert.ToDouble(TongTien) + Convert.ToDouble(item.TONGTIEN));
             }
-
-
+            <tr>
+                <td colpan="5"></td>
+                <td>Tổng Tiền : </td>
+                <td>@TongTien</td>
+            </tr>
+            <tr>
+                <td colpan="3"></td>
+                <td><a href="#" class="btn btn-success rounded-0">Đặt Hàng</a> </td>
+                <td colpan="3"></td>
+            </tr>
 
         </tbody>
     </table>
 
-<style>
-    td, th {
-        border: 1px solid black;
-    }
-</style>

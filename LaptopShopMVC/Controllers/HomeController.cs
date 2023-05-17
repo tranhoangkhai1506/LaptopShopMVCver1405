@@ -236,10 +236,8 @@ namespace LaptopShopMVC.Controllers
                     soLuong = mainlist[i].soLuong;
                     break;
                 }
-
             }
             Session["cart"] = (List<cart>)mainlist;
-
 
             return Json(soLuong, JsonRequestBehavior.AllowGet);
         }
@@ -263,14 +261,28 @@ namespace LaptopShopMVC.Controllers
                         soLuong = 1;
                         break;
                     }
-                    
                 }
 
             }
             Session["cart"] = (List<cart>)mainlist;
 
-
             return Json(soLuong, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult RemoveToCart(int id)
+        {
+            List<cart> mainlist = (List<cart>)Session["cart"];
+
+            cart cartItemToRemove = mainlist.FirstOrDefault(item => item.maSanPham == id);
+            if (cartItemToRemove != null)
+            {
+                mainlist.RemoveAll(item => item.maSanPham == id);
+            }
+
+            Session["cart"] = (List<cart>)mainlist;
+
+            return Json(mainlist, JsonRequestBehavior.AllowGet);
         }
 
     }

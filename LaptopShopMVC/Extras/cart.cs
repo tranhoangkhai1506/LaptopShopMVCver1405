@@ -10,5 +10,6 @@ namespace LaptopShopMVC.Extras
         public int maSanPham { get; set; }
 
         public int soLuong { get; set; }
+
     }
 }
