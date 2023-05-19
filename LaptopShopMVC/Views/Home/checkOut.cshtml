@@ -1,5 +1,4 @@
 ﻿@model LaptopShopMVC.Models.KHACHHANG
-
 @{
     ViewBag.Title = "checkOut";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -27,42 +26,46 @@
 
             viewlist.Add(obj);
         }
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Hình</th>
+                    <th>Giá Bán</th>
+                    <th>Số Lượng</th>
+                    <th>Tổng Tiền</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in viewlist)
+                {
+                    <tr>
+                        <td>@item.MASANPHAM</td>
+                        <td>@item.TENSANPHAM</td>
+                        <td><img src="~/images/@item.HINH" /></td>
+                        <td>@item.GIABAN</td>
+                        <td>@item.TONGTIEN</td>
+                    </tr>
+                    TongTien = Convert.ToString(Convert.ToDouble(TongTien) + Convert.ToDouble(item.TONGTIEN));
+                }
+                <tr>
+                    <td colpan="5"></td>
+                    <td>Tổng Tiền : </td>
+                    <td>@TongTien</td>
+                </tr>
+            </tbody>
+        </table>
+
+    }
+    else
+    {
+        <p>go to index</p>
     }
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Tên Sản Phẩm</th>
-                <th>Hình</th>
-                <th>Giá Bán</th>
-                <th>Số Lượng</th>
-                <th>Tổng Tiền</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in viewlist)
-            {
-                <tr>
-                    <td>@item.MASANPHAM</td>
-                    <td>@item.TENSANPHAM</td>
-                    <td><img src="~/images/@item.HINH" /></td>
-                    <td>@item.GIABAN</td>
-                    <td>@item.TONGTIEN</td>
-                </tr>
-                TongTien = Convert.ToString(Convert.ToDouble(TongTien) + Convert.ToDouble(item.TONGTIEN));
-            }
-            <tr>
-                <td colpan="5"></td>
-                <td>Tổng Tiền : </td>
-                <td>@TongTien</td>
-            </tr>
-
-
-        </tbody>
-    </table>
 }
+
 
 <div>
     <hr />
