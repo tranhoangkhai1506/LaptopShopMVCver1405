@@ -444,7 +444,7 @@ namespace LaptopShopMVC.Controllers
                     return HttpNotFound();
                 }
             }
-            return RedirectToAction("Payment", "VnPayQuang");
+            return RedirectToAction("Payment", "VnPay");
         }
     }
 
