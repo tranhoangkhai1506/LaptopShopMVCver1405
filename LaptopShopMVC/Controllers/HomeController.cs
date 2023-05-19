@@ -387,7 +387,7 @@ namespace LaptopShopMVC.Controllers
 
             TAIKHOANKHACHHANG taiKhoanKH = context.TAIKHOANKHACHHANGs.FirstOrDefault(p => p.TENDANGNHAP.Contains(User.Identity.Name));
             
-            if (taiKhoanKH != null)
+            if (taiKhoanKH != null && Session["cart"] != null)
             {
                 DONHANG newDonHang = new DONHANG();
                 newDonHang.MAKHACHHANG = taiKhoanKH.KHACHHANG.MAKHACHHANG;
@@ -399,7 +399,7 @@ namespace LaptopShopMVC.Controllers
                 
                 //send email
                 khachHang = taiKhoanKH.KHACHHANG;
-
+                //
                 DONHANG donhang_KH = context.DONHANGs.Where(m => m.MAKHACHHANG == khachHang.MAKHACHHANG).ToArray().Last();
 
                 EmailViewModels emailVm = new EmailViewModels();
@@ -444,7 +444,7 @@ namespace LaptopShopMVC.Controllers
                     return HttpNotFound();
                 }
             }
-            return this.View();
+            return RedirectToAction("Payment", "VnPayQuang");
         }
     }
 

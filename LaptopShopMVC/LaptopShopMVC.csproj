@@ -168,6 +168,10 @@
     <Compile Include="Models\TAIKHOANQUANTRI.cs" />
     <Compile Include="Models\THUONGHIEU.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VNPAY\PayCompare.cs" />
+    <Compile Include="VNPAY\PayLib.cs" />
+    <Compile Include="VNPAY\Util.cs" />
+    <Compile Include="VNPAY\VnPayController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\assets\demo\chart-area-demo.js" />
@@ -388,6 +392,7 @@
     <Content Include="Views\Account\Nhaptaikhoankhachhang.cshtml" />
     <Content Include="Views\Home\checkOut.cshtml" />
     <Content Include="Views\Home\order.cshtml" />
+    <Content Include="Views\VnPay\PaymentConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
