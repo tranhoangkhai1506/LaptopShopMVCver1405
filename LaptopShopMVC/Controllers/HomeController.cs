@@ -381,9 +381,73 @@ namespace LaptopShopMVC.Controllers
                 context.SaveChanges();
             }
         }
+        public ActionResult errorPayment()
+        {
+            TAIKHOANKHACHHANG taiKhoanKH = context.TAIKHOANKHACHHANGs.FirstOrDefault(p => p.TENDANGNHAP.Contains(User.Identity.Name));
+            DONHANG donhang_KH = context.DONHANGs.Where(m => m.MAKHACHHANG == taiKhoanKH.KHACHHANG.MAKHACHHANG).ToArray().Last();
+            var listCTDH = context.CHITIETDONHANGs.Where(p => p.MADONHANG == donhang_KH.MADONHANG).ToList();
+            context.CHITIETDONHANGs.RemoveRange(listCTDH);
+            context.DONHANGs.Remove(donhang_KH);
+            context.SaveChanges();
+
+            return View();
+        }
+
+        public ActionResult paymentSuccessful()
+        {
+            TAIKHOANKHACHHANG taiKhoanKH = context.TAIKHOANKHACHHANGs.FirstOrDefault(p => p.TENDANGNHAP.Contains(User.Identity.Name));
+
+
+            DONHANG donhang_KH = context.DONHANGs.Where(m => m.MAKHACHHANG == taiKhoanKH.KHACHHANG.MAKHACHHANG).ToArray().Last();
+
+            creataCTDH(donhang_KH.MADONHANG);
+
+            EmailViewModels emailVm = new EmailViewModels();
+
+            emailVm.EmailBody = @"<h2>Hello " + taiKhoanKH.KHACHHANG.TENKHACHHANG + "! </h2> <br />" +
+                            "<h3>THÔNG TIN ĐƠN HÀNG</h3>" +
+                            "Mã Đơn Hàng: " + donhang_KH.MADONHANG + "<br/>" +
+                            "Ngày Thanh Toán: " + donhang_KH.NGAYTHANHTOAN + "<br/>" +
+                            "Tổng Tiền: " + donhang_KH.TONGTIEN + "<br/>" +
+                            "Ngày gửi: " + DateTime.Now.ToString() + "<br/>" +
+                            "<br/>Thanks for shopping with FRICA!";
+
+            emailVm.SenderEmailAddress = System.Configuration.ConfigurationManager.AppSettings["SenderEmail"];
+            emailVm.SenderPassword = System.Configuration.ConfigurationManager.AppSettings["SenderPassword"];
+            emailVm.SmtpHostServer = System.Configuration.ConfigurationManager.AppSettings["smtpHostServer"];
+            emailVm.SmtpPort = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["smtpPort"]);
+            emailVm.ReceiverEmailAddress = taiKhoanKH.KHACHHANG.EMAIL;
+            emailVm.EmailSubject = "FRICA - COMFIRM";
+            try
+            {
+                var client = new SmtpClient(emailVm.SmtpHostServer, emailVm.SmtpPort)
+                {
+                    EnableSsl = true,
+                    Timeout = 100000,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(emailVm.SenderEmailAddress, emailVm.SenderPassword)
+                };
+                var mailMessage = new MailMessage
+                {
+                    IsBodyHtml = true,
+                    BodyEncoding = Encoding.UTF8,
+                    From = new MailAddress(emailVm.SenderEmailAddress)
+                };
+                mailMessage.To.Add(emailVm.ReceiverEmailAddress);
+                mailMessage.Subject = emailVm.EmailSubject;
+                mailMessage.Body = emailVm.EmailBody;
+                client.Send(mailMessage);
+            }
+            catch (Exception)
+            {
+                return HttpNotFound();
+            }
+            return View();
+        }
+
         public ActionResult order()
         {
-            KHACHHANG khachHang;
 
             TAIKHOANKHACHHANG taiKhoanKH = context.TAIKHOANKHACHHANGs.FirstOrDefault(p => p.TENDANGNHAP.Contains(User.Identity.Name));
             
@@ -395,54 +459,7 @@ namespace LaptopShopMVC.Controllers
                 newDonHang.NGAYTHANHTOAN = DateTime.Now;
                 context.DONHANGs.Add(newDonHang); 
                 context.SaveChanges();
-                creataCTDH(newDonHang.MADONHANG);
-                
-                //send email
-                khachHang = taiKhoanKH.KHACHHANG;
-                //
-                DONHANG donhang_KH = context.DONHANGs.Where(m => m.MAKHACHHANG == khachHang.MAKHACHHANG).ToArray().Last();
-
-                EmailViewModels emailVm = new EmailViewModels();
-
-                emailVm.EmailBody = @"<h2>Hello " + khachHang.TENKHACHHANG + "! </h2> <br />" +
-                                "<h3>THÔNG TIN ĐƠN HÀNG</h3>" +
-                                "Mã Đơn Hàng: " + donhang_KH.MADONHANG + "<br/>" +
-                                "Ngày Thanh Toán: " + donhang_KH.NGAYTHANHTOAN + "<br/>" +
-                                "Tổng Tiền: " + donhang_KH.TONGTIEN + "<br/>" +
-                                "Ngày gửi: " + DateTime.Now.ToString() + "<br/>" +
-                                "<br/>Thanks for shopping with FRICA!";
-
-                emailVm.SenderEmailAddress = System.Configuration.ConfigurationManager.AppSettings["SenderEmail"];
-                emailVm.SenderPassword = System.Configuration.ConfigurationManager.AppSettings["SenderPassword"];
-                emailVm.SmtpHostServer = System.Configuration.ConfigurationManager.AppSettings["smtpHostServer"];
-                emailVm.SmtpPort = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["smtpPort"]);
-                emailVm.ReceiverEmailAddress = khachHang.EMAIL;
-                emailVm.EmailSubject = "FRICA - COMFIRM";
-                try
-                {
-                    var client = new SmtpClient(emailVm.SmtpHostServer, emailVm.SmtpPort)
-                    {
-                        EnableSsl = true,
-                        Timeout = 100000,
-                        DeliveryMethod = SmtpDeliveryMethod.Network,
-                        UseDefaultCredentials = false,
-                        Credentials = new NetworkCredential(emailVm.SenderEmailAddress, emailVm.SenderPassword)
-                    };
-                    var mailMessage = new MailMessage
-                    {
-                        IsBodyHtml = true,
-                        BodyEncoding = Encoding.UTF8,
-                        From = new MailAddress(emailVm.SenderEmailAddress)
-                    };
-                    mailMessage.To.Add(emailVm.ReceiverEmailAddress);
-                    mailMessage.Subject = emailVm.EmailSubject;
-                    mailMessage.Body = emailVm.EmailBody;
-                    client.Send(mailMessage);
-                }
-                catch (Exception)
-                {
-                    return HttpNotFound();
-                }
+                Session["cart"] = null;
             }
             return RedirectToAction("Payment", "VnPay");
         }

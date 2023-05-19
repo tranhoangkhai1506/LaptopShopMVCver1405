@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "errorPayment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="computer_main">
+    <h1>Payment Error</h1>
+    <p>We apologize, but there was an error processing your payment.</p>
+    <p>@ViewBag.MaGiaoDich</p>
+    <p>@ViewBag.MaLoi</p>
+    <p>Please try again later or contact customer support for assistance.</p>
+    <a href="@Url.Action("Index", "Home")" class="back-button">Go to Home</a>
+
+</div>
+
+
+<style>
+    .back-button {
+        padding: 8px 16px;
+        font-size: 16px;
+        text-decoration: none;
+        color: #fff;
+        background-color: #007bff;
+        border-radius: 4px;
+    }
+</style>

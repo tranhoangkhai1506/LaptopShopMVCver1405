@@ -73,12 +73,14 @@ namespace LaptopShopMVC.VNPAY
                     {
                         ViewBag.Message = "Thanh toán thành công hóa đơn: " + orderId;
                         ViewBag.MaGiaoDich = "Mã giao dịch: " + vnpayTranId;
+                        return RedirectToAction("paymentSuccessful", "Home");
                     }
                     else
                     {
                         ViewBag.Message = "Có lỗi xảy ra trong quá trình xử lý hóa đơn: " + orderId;
                         ViewBag.MaGiaoDich = "Mã giao dịch: " + vnpayTranId;
                         ViewBag.MaLoi = "Mã lỗi: " + vnp_ResponseCode;
+                        return RedirectToAction("errorPayment", "Home");
                     }
                 }
                 else
@@ -87,7 +89,7 @@ namespace LaptopShopMVC.VNPAY
                 }
             }
 
-            return View();
+            return RedirectToAction("errorResult");
         }
     }
 }
