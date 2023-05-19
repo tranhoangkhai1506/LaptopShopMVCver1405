@@ -394,6 +394,8 @@
     <Content Include="Views\VnPay\PaymentConfirm.cshtml" />
     <Content Include="Views\Home\errorPayment.cshtml" />
     <Content Include="Views\Home\paymentSuccessful.cshtml" />
+    <Content Include="Views\Home\order.cshtml" />
+    <Content Include="Views\Home\datHangThanhCong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

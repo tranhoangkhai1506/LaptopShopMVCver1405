@@ -1,7 +1,12 @@
-﻿using System;
+﻿using LaptopShopMVC.Email;
+using LaptopShopMVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -42,6 +47,55 @@ namespace LaptopShopMVC.VNPAY
 
             return Redirect(paymentUrl);
         }
+        LaptopDBContext context = new LaptopDBContext();
+
+        public void sendingEMail()
+        {
+            TAIKHOANKHACHHANG taiKhoanKH = context.TAIKHOANKHACHHANGs.FirstOrDefault(p => p.TENDANGNHAP.Contains(User.Identity.Name));
+
+            DONHANG donhang_KH = context.DONHANGs.Where(m => m.MAKHACHHANG == taiKhoanKH.KHACHHANG.MAKHACHHANG).ToArray().Last();
+            EmailViewModels emailVm = new EmailViewModels();
+
+            emailVm.EmailBody = @"<h2>Hello " + taiKhoanKH.KHACHHANG.TENKHACHHANG + "! </h2> <br />" +
+                            "<h3>THÔNG TIN ĐƠN HÀNG</h3>" +
+                            "Mã Đơn Hàng: " + donhang_KH.MADONHANG + "<br/>" +
+                            "Ngày Đặt: " + donhang_KH.NGAYTHANHTOAN + "<br/>" +
+                            "Tổng Tiền: " + donhang_KH.TONGTIEN + "<br/>" +
+                            "Ngày gửi: " + DateTime.Now.ToString() + "<br/>" +
+                            "<br/>Thanks for shopping with FRICA!";
+
+            emailVm.SenderEmailAddress = System.Configuration.ConfigurationManager.AppSettings["SenderEmail"];
+            emailVm.SenderPassword = System.Configuration.ConfigurationManager.AppSettings["SenderPassword"];
+            emailVm.SmtpHostServer = System.Configuration.ConfigurationManager.AppSettings["smtpHostServer"];
+            emailVm.SmtpPort = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["smtpPort"]);
+            emailVm.ReceiverEmailAddress = taiKhoanKH.KHACHHANG.EMAIL;
+            emailVm.EmailSubject = "FRICA - COMFIRM";
+            try
+            {
+                var client = new SmtpClient(emailVm.SmtpHostServer, emailVm.SmtpPort)
+                {
+                    EnableSsl = true,
+                    Timeout = 100000,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(emailVm.SenderEmailAddress, emailVm.SenderPassword)
+                };
+                var mailMessage = new MailMessage
+                {
+                    IsBodyHtml = true,
+                    BodyEncoding = Encoding.UTF8,
+                    From = new MailAddress(emailVm.SenderEmailAddress)
+                };
+                mailMessage.To.Add(emailVm.ReceiverEmailAddress);
+                mailMessage.Subject = emailVm.EmailSubject;
+                mailMessage.Body = emailVm.EmailBody;
+                client.Send(mailMessage);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public ActionResult PaymentConfirm()
         {
@@ -73,6 +127,7 @@ namespace LaptopShopMVC.VNPAY
                     {
                         ViewBag.Message = "Thanh toán thành công hóa đơn: " + orderId;
                         ViewBag.MaGiaoDich = "Mã giao dịch: " + vnpayTranId;
+                        sendingEMail();
                         return RedirectToAction("paymentSuccessful", "Home");
                     }
                     else

@@ -389,19 +389,14 @@ namespace LaptopShopMVC.Controllers
             context.CHITIETDONHANGs.RemoveRange(listCTDH);
             context.DONHANGs.Remove(donhang_KH);
             context.SaveChanges();
-
             return View();
         }
 
-        public ActionResult paymentSuccessful()
+        public void sendingEMail()
         {
             TAIKHOANKHACHHANG taiKhoanKH = context.TAIKHOANKHACHHANGs.FirstOrDefault(p => p.TENDANGNHAP.Contains(User.Identity.Name));
 
-
             DONHANG donhang_KH = context.DONHANGs.Where(m => m.MAKHACHHANG == taiKhoanKH.KHACHHANG.MAKHACHHANG).ToArray().Last();
-
-            creataCTDH(donhang_KH.MADONHANG);
-
             EmailViewModels emailVm = new EmailViewModels();
 
             emailVm.EmailBody = @"<h2>Hello " + taiKhoanKH.KHACHHANG.TENKHACHHANG + "! </h2> <br />" +
@@ -441,14 +436,41 @@ namespace LaptopShopMVC.Controllers
             }
             catch (Exception)
             {
-                return HttpNotFound();
+                throw;
             }
+        }
+
+        public ActionResult paymentSuccessful()
+        {
             return View();
+        }
+
+        public ActionResult datHangThanhCong()
+        {
+            return View();
+        }
+
+        public ActionResult datHang()
+        {
+            TAIKHOANKHACHHANG taiKhoanKH = context.TAIKHOANKHACHHANGs.FirstOrDefault(p => p.TENDANGNHAP.Contains(User.Identity.Name));
+
+            if (taiKhoanKH != null && Session["cart"] != null)
+            {
+                DONHANG newDonHang = new DONHANG();
+                newDonHang.MAKHACHHANG = taiKhoanKH.KHACHHANG.MAKHACHHANG;
+                newDonHang.MANHANVIEN = 1;
+                newDonHang.NGAYTHANHTOAN = DateTime.Now;
+                context.DONHANGs.Add(newDonHang);
+                context.SaveChanges();
+                creataCTDH(newDonHang.MADONHANG);
+                sendingEMail();
+                Session["cart"] = null;
+            }
+            return RedirectToAction("datHangThanhCong", "Home");
         }
 
         public ActionResult order()
         {
-
             TAIKHOANKHACHHANG taiKhoanKH = context.TAIKHOANKHACHHANGs.FirstOrDefault(p => p.TENDANGNHAP.Contains(User.Identity.Name));
             
             if (taiKhoanKH != null && Session["cart"] != null)
@@ -459,6 +481,7 @@ namespace LaptopShopMVC.Controllers
                 newDonHang.NGAYTHANHTOAN = DateTime.Now;
                 context.DONHANGs.Add(newDonHang); 
                 context.SaveChanges();
+                creataCTDH(newDonHang.MADONHANG);
                 Session["cart"] = null;
             }
             return RedirectToAction("Payment", "VnPay");
