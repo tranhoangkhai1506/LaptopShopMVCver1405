@@ -87,7 +87,6 @@
 
                                 <li><a href="@Url.Action("ViewCart", "Home")"><img src="~/images/trolly-icon.png" /></a><span class="h4 text-dark" id="count">@soLuong</span></li>
                                 <li><a href="@Url.Action("Searching", "Home")"><img src="~/images/search-icon.png"></a></li>
-                                <li><a href="@Url.Action("order", "Home")"><img src="~/images/search-icon.png"></a></li>
                             }
                             else
                             {
@@ -188,6 +187,19 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script>
+        (function (d, w, c) {
+            w.ChatraID = '83EkxeN255g6JRArx';
+            var s = d.createElement('script');
+            w[c] = w[c] || function () {
+                (w[c].q = w[c].q || []).push(arguments);
+            };
+            s.async = true;
+            s.src = 'https://call.chatra.io/chatra.js';
+            if (d.head) d.head.appendChild(s);
+        })(document, window, 'Chatra');
+    </script>
 
     <!-- Javascript files-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
