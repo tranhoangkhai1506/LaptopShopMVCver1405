@@ -1,0 +1,54 @@
+﻿@model IEnumerable<LaptopShopMVC.Models.CHITIETDONHANG>
+
+@{
+    ViewBag.Title = "viewDetailDonHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<label style="font-size: 38px">THÔNG TIN CHI TIẾT</label>
+<table class="table">
+    <tr>
+        <th>
+            Mã đơn hàng
+        </th>
+        <th>
+            Tên sản phẩm
+        </th>
+        <th>
+            Số lượng
+        </th>
+        <th>
+            Giá
+        </th>
+        <th>
+            Ngày lập
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DONHANG.MADONHANG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SANPHAM.TENSANPHAM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SOLUONG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GIA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NGAYLAP)
+            </td>
+        </tr>
+    }
+</table>
+<a href="#" onclick="history.back(); return false;" class="btn btn-success rounded-0">Return</a>
+<style>
+    table, th, td {
+        border: 1px solid black;
+    }
+</style>

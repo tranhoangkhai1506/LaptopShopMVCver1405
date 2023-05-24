@@ -70,11 +70,11 @@
                                 }
                                 if (taikhoan != null)
                                 {
-                                    <li><a style="color: navy" href="#">Welcome, @taikhoan.NHANVIEN.TENNHANVIEN!</a></li>
+                                    <li><a style="color: navy" href="@Url.Action("viewProfileAndChangePasswordAdmin", "Home", new {id = taikhoan.NHANVIEN.MANHANVIEN})">Welcome, @taikhoan.NHANVIEN.TENNHANVIEN!</a></li>
                                 }
                                 else if (khachHang != null)
                                 {
-                                    <li><a style="color: navy" href="#">Welcome, @khachHang.KHACHHANG.TENKHACHHANG!</a></li>
+                                    <li><a style="color: navy" href="@Url.Action("viewProfileAndChangePassword", "Home", new {id = khachHang.KHACHHANG.MAKHACHHANG})">Welcome, @khachHang.KHACHHANG.TENKHACHHANG!</a></li>
                                 }
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="~/images/user-icon.png"></a>
@@ -139,6 +139,7 @@
     </div>
     <div class="container body-content">
         @RenderBody()
+        <a href="#top" id="back-to-top">Back to Top</a>
         <footer>
             <!-- footer section start -->
             <div class="footer_section layout_padding margin_top_90">
@@ -190,7 +191,7 @@
 
     <script>
         (function (d, w, c) {
-            w.ChatraID = '83EkxeN255g6JRArx';
+            w.ChatraID = '7RsdjeRwQSMTkNTPD';
             var s = d.createElement('script');
             w[c] = w[c] || function () {
                 (w[c].q = w[c].q || []).push(arguments);
@@ -316,6 +317,29 @@
 
 
 <style>
+    #back-to-top {
+        display: none;
+        position: fixed;
+        bottom: 65px;
+        right: 60px;
+        width: 140px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        line-height: 40px;
+        font-size: 16px;
+        opacity: 0.7;
+        cursor: pointer;
+        transition: opacity 0.3s, background-color 0.3s;
+    }
+
+        #back-to-top:hover {
+            opacity: 1;
+            background-color: #555;
+        }
+
 
     .navbar {
         display: flex;
@@ -407,20 +431,20 @@
 </style>
 
 <script>
-    var button = document.getElementById("filter-button");
-    button.addEventListener("click", function (event) {
-        toggleFilterFields(event);
+    window.addEventListener('scroll', function () {
+        var button = document.getElementById('back-to-top');
+        if (window.pageYOffset > 100) {
+            button.style.display = 'block';
+        } else {
+            button.style.display = 'none';
+        }
     });
 
-    function toggleFilterFields(event) {
-        event.preventDefault();
-        var fields = document.getElementById("filter-fields");
-        if (fields.style.display === "none") {
-            fields.style.display = "block";
-        } else {
-            fields.style.display = "none";
-        }
-    }
+    document.getElementById('back-to-top').addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
 </script>
 
 

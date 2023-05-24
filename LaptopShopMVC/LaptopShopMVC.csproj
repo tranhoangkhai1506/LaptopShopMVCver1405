@@ -159,6 +159,7 @@
     <Compile Include="Models\DONHANG.cs" />
     <Compile Include="Models\KHACHHANG.cs" />
     <Compile Include="Models\LaptopDBContext.cs" />
+    <Compile Include="Models\MyAccount.cs" />
     <Compile Include="Models\NHANVIEN.cs" />
     <Compile Include="Models\PHANQUYEN.cs" />
     <Compile Include="Models\PHIEUBAOHANH.cs" />
@@ -396,6 +397,12 @@
     <Content Include="Views\Home\paymentSuccessful.cshtml" />
     <Content Include="Views\Home\order.cshtml" />
     <Content Include="Views\Home\datHangThanhCong.cshtml" />
+    <Content Include="Views\Home\viewProfileAndChangePassword.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\Home\viewProfileAndChangePasswordAdmin.cshtml" />
+    <Content Include="Views\Home\EditAdmin.cshtml" />
+    <Content Include="Views\Home\viewDetailDonHang.cshtml" />
+    <Content Include="Views\Home\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

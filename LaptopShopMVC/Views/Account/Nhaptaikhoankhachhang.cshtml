@@ -4,6 +4,7 @@
     ViewBag.Title = "Nhaptaikhoankhachhang";
     Layout = "~/Views/Shared/_empty.cshtml";
 }
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
 @using (Html.BeginForm())
@@ -47,13 +48,14 @@
                                         <div class="form-group">
                                             <p>Xác nhận mật khẩu</p>
                                             <div class="col-md-10">
-                                                @Html.EditorFor(model => model.MATKHAU, new { htmlAttributes = new { @class = "form-control", required = "required" } })
-                                                @Html.ValidationMessageFor(model => model.MATKHAU, "", new { @class = "text-danger" })
+                                                <input style="width: 300px;height: 40px;" type="password" id="XacNhanMatKhau" class="compare-input" />
                                             </div>
                                         </div>
+                                        <div id="comparisonResult"></div>
 
                                         <div class="text-center pt-1 mb-5 pb-1">
-                                            <input type="submit" value="Tiếp tục" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" />
+                                            
+                                            <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" id="saveButton">Hoàn Thành</button>
                                         </div>
                                     </form>
                                     <div class="text-center pt-1 mb-5 pb-1">
@@ -83,3 +85,32 @@
         background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
     }
 </style>
+@section scripts {
+    <script>
+        function compareValues() {
+            var value1 = document.getElementById('MATKHAU').value;
+            var value2 = document.getElementById('XacNhanMatKhau').value;
+
+            var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{6,8}$/;
+            if (!regex.test(value1)) {
+                document.getElementById('comparisonResult').innerHTML = "Mật khẩu phải có độ dài từ 6 - 8 kí tự, có ít nhất 1 kí tự hoa, 1 kí tự thường, 1 kí tự đặc biệt";
+                document.getElementById('saveButton').style.display = "none";
+            }
+            else if (value1 === value2) {
+                document.getElementById('comparisonResult').innerHTML = "";
+                document.getElementById('saveButton').style.display = "block";
+            } else {
+                document.getElementById('comparisonResult').innerHTML = "Xác nhận mật khẩu không hợp lệ!";
+                document.getElementById('saveButton').style.display = "none";
+            }
+        }
+        var inputField = document.querySelector('.compare-input');
+        var typingTimer;
+        var doneTypingInterval = 500; // Adjust the delay as needed
+
+        inputField.addEventListener('keyup', function () {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(compareValues, doneTypingInterval);
+        });
+    </script>
+}
