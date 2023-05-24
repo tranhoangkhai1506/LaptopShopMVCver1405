@@ -5,46 +5,60 @@
     Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
 }
 
-<h2>Create</h2>
+<br />
+<h2 style="text-align:center">Thêm Đánh Giá</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>DANHGIA</h4>
+    <div class="form-horizontal" style="text-align:center">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            <div class="col-md-10">
-                Khách Hàng
+            @Html.LabelFor(model => model.MAKHACHHANG, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="fix_column">
                 @Html.DropDownList("MAKHACHHANG", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.MAKHACHHANG, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <div class="col-md-10">
-                Mã Sản Phẩm
+            @Html.LabelFor(model => model.MASANPHAM, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="fix_column">
                 @Html.DropDownList("MASANPHAM", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.MASANPHAM, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <div class="col-md-10">
-                Nội Dung
-                @Html.EditorFor(model => model.NOIDUNG, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.NOIDUNG, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="fix_column">
+                @Html.EditorFor(model => model.NOIDUNG, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                 @Html.ValidationMessageFor(model => model.NOIDUNG, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="btn btn-secondary" style="margin: 0 auto; width: 130px">
-            <input type="submit" value="Create" class="btn btn-default" />
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-12 ">
+                <input type="submit" value="Create" class="btn btn-success" /> |
+                <div class="btn btn-info">
+                    @Html.ActionLink("Back", "Index", null, new { style = "color: white;" })
+                </div>
+            </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<style>
+    .fix_column {
+        width: 50%;
+        display: inline-block;
+        text-align: left;
+    }
+
+    .form-group {
+        margin: 10px;
+    }
+</style>

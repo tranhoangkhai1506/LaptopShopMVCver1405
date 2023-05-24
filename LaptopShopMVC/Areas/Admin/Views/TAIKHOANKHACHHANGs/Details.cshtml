@@ -5,37 +5,26 @@
     Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
 }
 
+<button class="btn btn-info" style="width: 120px">
+    @Html.ActionLink("Back", "Index", null, new { style = "color: white;" })
+</button>
+
 <div style="text-align:center">
-    <h4>Tài Khoản Khách Hàng</h4>
+    <h4>Chi Tiết Tài Khoản Khách Hàng</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Tên Khách Hàng
+            Tên Khách Hàng: @Html.DisplayFor(model => model.KHACHHANG.TENKHACHHANG)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.KHACHHANG.TENKHACHHANG)
-        </dd>
 
         <dt>
-            Tên Đăng Nhập
+            Tên Đăng Nhập: @Html.DisplayFor(model => model.TENDANGNHAP)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TENDANGNHAP)
-        </dd>
 
         <dt>
-            Mật Khẩu
+            Mật Khẩu: @Html.DisplayFor(model => model.MATKHAU)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MATKHAU)
-        </dd>
 
     </dl>
 </div>
-<p style="text-align:center">
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TENDANGNHAP }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

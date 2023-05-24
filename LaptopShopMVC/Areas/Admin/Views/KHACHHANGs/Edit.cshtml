@@ -5,6 +5,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
 }
 
+<<<<<<< Updated upstream
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -28,9 +29,80 @@
         <div class="col-md-10">
             @Html.EditorFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
+=======
+<br />
+<h2 style="text-align:center">Chỉnh Sửa Thông Tin Khách Hàng</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" style="text-align:center">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MAKHACHHANG)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TENKHACHHANG, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div style="width: 50%; display: inline-block; text-align: left;">
+                @Html.EditorFor(model => model.TENKHACHHANG, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TENKHACHHANG, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EMAIL, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div style="width: 50%; display: inline-block; text-align: left;">
+                @Html.EditorFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CCCD, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div style="width: 50%; display: inline-block; text-align: left;">
+                @Html.EditorFor(model => model.CCCD, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CCCD, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NGAYSINH, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div style="width: 50%; display: inline-block; text-align: left;">
+                @Html.EditorFor(model => model.NGAYSINH, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NGAYSINH, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DIACHI, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div style="width: 50%; display: inline-block; text-align: left;">
+                @Html.EditorFor(model => model.DIACHI, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DIACHI, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SDT, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div style="width: 50%; display: inline-block; text-align: left;">
+                @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-12">
+                <input type="submit" value="Save" class="btn btn-success" />
+                <div class="btn btn-info">
+                    @Html.ActionLink("Back", "Index", null, new { style = "color: white;" })
+                </div>
+            </div>
+>>>>>>> Stashed changes
         </div>
     </div>
 
+<<<<<<< Updated upstream
     <div class="form-group">
         @Html.LabelFor(model => model.CCCD, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -68,3 +140,10 @@
     </div>
 </div>
 }
+=======
+<style>
+    .form-group {
+        margin: 10px
+    }
+</style>
+>>>>>>> Stashed changes

@@ -5,60 +5,34 @@
     Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>KHACHHANG</h4>
+<div style="text-align:center">
+    <h2>Xóa Khách Hàng</h2>
+    <h3>Bạn có chắc chắn muốn xóa khách hàng này?</h3>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Khách Hàng
+            Khách Hàng: @Html.DisplayFor(model => model.TENKHACHHANG)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TENKHACHHANG)
-        </dd>
 
         <dt>
-            Email
+            Email: @Html.DisplayFor(model => model.EMAIL)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EMAIL)
-        </dd>
 
         <dt>
-            Căn Cước Công Dân
+            Căn Cước Công Dân: @Html.DisplayFor(model => model.CCCD)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CCCD)
-        </dd>
 
         <dt>
-            Ngày Sinh
+            Ngày Sinh: @Html.DisplayFor(model => model.NGAYSINH)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NGAYSINH)
-        </dd>
 
         <dt>
-            Địa Chỉ
+            Địa Chỉ: @Html.DisplayFor(model => model.DIACHI)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DIACHI)
-        </dd>
 
         <dt>
-            Số Điện Thoại
+            Số Điện Thoại: @Html.DisplayFor(model => model.SDT)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SDT)
-        </dd>
 
     </dl>
 
@@ -67,8 +41,10 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-secondary" style="margin: 0 auto; width: 130px" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <div class="btn btn-info">
+                @Html.ActionLink("Back", "Index", null, new { style = "color: white;" })
+            </div>
         </div>
     }
 </div>

@@ -11,19 +11,23 @@
     @Html.ActionLink("Create New", "Create", null, new { style = "color: white;" })
 </button>
 <br />
-<table class="table">
-    <tr>
-        <th>
-            Tên Nhân Viên
-        </th>
-        <th>
-            Ngày Nhập Hàng
-        </th>
-        <th>
-            Tổng Tiền
-        </th>
-    </tr>
-
+<table class="table" style="text-align:center">
+    <thead class="table-info">
+        <tr>
+            <th>
+                Tên Nhân Viên
+            </th>
+            <th>
+                Ngày Nhập Hàng
+            </th>
+            <th>
+                Tổng Tiền
+            </th>
+            <th>
+                Chức Năng
+            </th>
+        </tr>
+    </thead>
     @foreach (var item in Model)
     {
         <tr>
@@ -46,11 +50,6 @@
 
 </table>
 <style>
-    .datatable-container {
-        width: 50%;
-        margin: 0 auto;
-    }
-
     table {
         width: 100%;
     }
@@ -58,4 +57,13 @@
     td, th {
         border: 1px solid black;
     }
+
+    .table {
+        width: 95%;
+        margin: 0 auto;
+    }
+
+        .table tr:hover {
+            background-color: #f5f5f5;
+        }
 </style>

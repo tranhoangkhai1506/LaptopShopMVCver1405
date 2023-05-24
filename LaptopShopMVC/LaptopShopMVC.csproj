@@ -397,12 +397,16 @@
     <Content Include="Views\Home\paymentSuccessful.cshtml" />
     <Content Include="Views\Home\order.cshtml" />
     <Content Include="Views\Home\datHangThanhCong.cshtml" />
+<<<<<<< Updated upstream
     <Content Include="Views\Home\viewProfileAndChangePassword.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Home\viewProfileAndChangePasswordAdmin.cshtml" />
     <Content Include="Views\Home\EditAdmin.cshtml" />
     <Content Include="Views\Home\viewDetailDonHang.cshtml" />
     <Content Include="Views\Home\ChangePassword.cshtml" />
+=======
+    <Content Include="Views\Home\EditKhachHang.cshtml" />
+>>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

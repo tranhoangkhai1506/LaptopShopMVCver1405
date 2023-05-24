@@ -5,19 +5,19 @@
     Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
 }
 
-<h2>Create</h2>
+<br />
+<h2 style="text-align:center">Thêm Chi Tiết Phiếu Nhập Hàng</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>CHITIETPHIEUNHAPHANG</h4>
+
+    <div class="form-horizontal" style="text-align:center">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.MAPHIEUNHAPHANG, "MAPHIEUNHAPHANG", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="fix_column">
                 @Html.DropDownList("MAPHIEUNHAPHANG", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.MAPHIEUNHAPHANG, "", new { @class = "text-danger" })
             </div>
@@ -25,7 +25,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.MASANPHAM, "MASANPHAM", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="fix_column">
                 @Html.DropDownList("MASANPHAM", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.MASANPHAM, "", new { @class = "text-danger" })
             </div>
@@ -33,7 +33,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.SOLUONGNHAP, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="fix_column">
                 @Html.EditorFor(model => model.SOLUONGNHAP, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SOLUONGNHAP, "", new { @class = "text-danger" })
             </div>
@@ -41,7 +41,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.GIA, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="fix_column">
                 @Html.EditorFor(model => model.GIA, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.GIA, "", new { @class = "text-danger" })
             </div>
@@ -49,20 +49,33 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.NGAYLAP, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="fix_column">
                 @Html.EditorFor(model => model.NGAYLAP, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.NGAYLAP, "", new { @class = "text-danger" })
             </div>
         </div>
 
+        <br />
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="col-md-offset-2 col-md-12 ">
+                <input type="submit" value="Create" class="btn btn-success" /> |
+                <div class="btn btn-info">
+                    @Html.ActionLink("Back", "Index", null, new { style = "color: white;" })
+                </div>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+<style>
+    .fix_column {
+        width: 50%;
+        display: inline-block;
+        text-align: left;
+    }
+
+    .form-group {
+        margin: 10px;
+    }
+</style>

@@ -5,63 +5,40 @@
     Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
 }
 
-<h2>Details</h2>
+<button class="btn btn-info" style="width: 120px">
+    @Html.ActionLink("Back", "Index", null, new { style = "color: white;" })
+</button>
 
-<div>
-    <h4>KHACHHANG</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Tên Khách Hàng
-        </dt>
+<div style="text-align:center">
+    <h2>Chi Tiết Khách Hàng</h2>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Tên Khách Hàng: @Html.DisplayFor(model => model.TENKHACHHANG)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.TENKHACHHANG)
-        </dd>
+            <dt>
+                Email: @Html.DisplayFor(model => model.EMAIL)
+            </dt>
 
-        <dt>
-            Email
-        </dt>
+            <dt>
+                Căn Cước Công Dân: @Html.DisplayFor(model => model.CCCD)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.EMAIL)
-        </dd>
+            <dt>
+                Ngày Sinh: @Html.DisplayFor(model => model.NGAYSINH)
+            </dt>
 
-        <dt>
-            Căn Cước Công Dân
-        </dt>
+            <dt>
+                Địa Chỉ: @Html.DisplayFor(model => model.DIACHI)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CCCD)
-        </dd>
+            <dt>
+                Số Điện Thoại: @Html.DisplayFor(model => model.SDT)
+            </dt>
 
-        <dt>
-            Ngày Sinh
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NGAYSINH)
-        </dd>
-
-        <dt>
-            Địa Chỉ
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DIACHI)
-        </dd>
-
-        <dt>
-            Số Điện Thoại
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SDT)
-        </dd>
-
-    </dl>
+        </dl>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MAKHACHHANG }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

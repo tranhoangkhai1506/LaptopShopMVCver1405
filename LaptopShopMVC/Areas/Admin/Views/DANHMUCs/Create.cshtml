@@ -18,7 +18,7 @@
             <div class="form-group">
                 Tên Danh Mục :
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.TENDANHMUC, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.TENDANHMUC, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                     @Html.ValidationMessageFor(model => model.TENDANHMUC, "", new { @class = "text-danger" })
                 </div>
             </div>

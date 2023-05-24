@@ -85,7 +85,10 @@
                                     </ul>
                                 </li>
 
-                                <li><a href="@Url.Action("ViewCart", "Home")"><img src="~/images/trolly-icon.png" /></a><span class="h4 text-dark" id="count">@soLuong</span></li>
+                                <li style="position: relative; list-style-type: none;">
+                                    <a href="@Url.Action("ViewCart", "Home")"><img src="~/images/trolly-icon.png" /></a>
+                                    <span class="h4 text-dark" id="count" style="position: absolute; bottom: -13px; right: -5px; background-color: yellowgreen; color: white; padding: 5px; border-radius: 50%; width: 15px; height: 15px; text-align: center; line-height: 20px; font-size: 12px; display: flex; justify-content: center; align-items: center; ">@soLuong</span>
+                                </li>
                                 <li><a href="@Url.Action("Searching", "Home")"><img src="~/images/search-icon.png"></a></li>
                             }
                             else
@@ -103,8 +106,10 @@
                                         <li><a href="@Url.Action("Login", "Account")">Sign In</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="@Url.Action("ViewCart", "Home")"><img src="~/images/trolly-icon.png" /></a><span class="h4 text-dark" id="count">@soLuong</span></li>
-
+                                <li style="position: relative; list-style-type: none;">
+                                    <a href="@Url.Action("ViewCart", "Home")"><img src="~/images/trolly-icon.png" /></a>
+                                    <span class="h4 text-dark" id="count" style="position: absolute; bottom: -13px; right: -5px; background-color: yellowgreen; color: white; padding: 5px; border-radius: 50%; width: 15px; height: 15px; text-align: center; line-height: 20px; font-size: 12px; display: flex; justify-content: center; align-items: center; ">@soLuong</span>
+                                </li>
                                 <li><a href="@Url.Action("Searching", "Home")"><img src="~/images/search-icon.png"></a></li>
                             }
                         </ul>
@@ -264,6 +269,7 @@
                     success: function (res) {
                         console.log(res)
                         window.location.reload();
+                        res.status(200).json({ success: true });
                     }
                 }
             );
@@ -278,7 +284,6 @@
                     data: { id: MASANPHAM },
                     dataType: "json",
                     success: function (res) {
-                        //console.log(res)
                         document.getElementsByClassName("inc_count")[index].innerHTML = res;
                         window.location.reload();
                     }
@@ -296,7 +301,6 @@
                     data: { id: MASANPHAM },
                     dataType: "json",
                     success: function (res) {
-                        //console.log(res)
                         document.getElementsByClassName("inc_count")[index].innerHTML = res;
                         window.location.reload();
                     }

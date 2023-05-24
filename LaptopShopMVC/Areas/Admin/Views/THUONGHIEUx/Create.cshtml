@@ -18,7 +18,7 @@
             Tên Thương Hiệu
             <br />
             <div style="width: 50%; display: inline-block; text-align: left;">
-                @Html.EditorFor(model => model.TENTHUONGHIEU, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.TENTHUONGHIEU, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                 @Html.ValidationMessageFor(model => model.TENTHUONGHIEU, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -27,7 +27,7 @@
             Xuất Xứ
             <br />
             <div style="width: 50%; display: inline-block; text-align: left;">
-                @Html.EditorFor(model => model.XUATXU, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.XUATXU, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                 @Html.ValidationMessageFor(model => model.XUATXU, "", new { @class = "text-danger" })
             </div>
         </div>

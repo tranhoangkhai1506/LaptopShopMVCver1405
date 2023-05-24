@@ -13,10 +13,15 @@ using LaptopShopMVC.Email;
 using System.Net.Mail;
 using System.Net;
 using System.Text;
+<<<<<<< Updated upstream
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Web.UI.WebControls;
+=======
+using System.Threading.Tasks;
+using System.Data.Entity;
+>>>>>>> Stashed changes
 
 namespace LaptopShopMVC.Controllers
 {
@@ -491,6 +496,7 @@ namespace LaptopShopMVC.Controllers
             return RedirectToAction("Payment", "VnPay");
         }
 
+<<<<<<< Updated upstream
         public ActionResult viewProfileAndChangePassword(int? id)
         {
             KHACHHANG kHACHHANG = context.KHACHHANGs.FirstOrDefault(p => p.MAKHACHHANG == id);
@@ -504,6 +510,9 @@ namespace LaptopShopMVC.Controllers
         }
 
         public async Task<ActionResult> Edit(int? id)
+=======
+        public async Task<ActionResult> EditKhachHang(int? id)
+>>>>>>> Stashed changes
         {
             if (id == null)
             {
@@ -516,6 +525,7 @@ namespace LaptopShopMVC.Controllers
             }
             return View(kHACHHANG);
         }
+<<<<<<< Updated upstream
 
         // POST: Admin/KHACHHANGs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -523,11 +533,17 @@ namespace LaptopShopMVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "MAKHACHHANG,TENKHACHHANG,EMAIL,CCCD,NGAYSINH,DIACHI,SDT")] KHACHHANG kHACHHANG)
+=======
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditKhachHang([Bind(Include = "MAKHACHHANG,TENKHACHHANG,EMAIL,CCCD,NGAYSINH,DIACHI,SDT")] KHACHHANG kHACHHANG)
+>>>>>>> Stashed changes
         {
             if (ModelState.IsValid)
             {
                 context.Entry(kHACHHANG).State = EntityState.Modified;
                 await context.SaveChangesAsync();
+<<<<<<< Updated upstream
                 return RedirectToAction("viewProfileAndChangePassword", "Home", new {id = kHACHHANG.MAKHACHHANG});
             }
             return View(kHACHHANG);
@@ -602,6 +618,12 @@ namespace LaptopShopMVC.Controllers
         }
 
        
+=======
+                return RedirectToAction("checkOut");
+            }
+            return View(kHACHHANG);
+        }
+>>>>>>> Stashed changes
     }
 
 }

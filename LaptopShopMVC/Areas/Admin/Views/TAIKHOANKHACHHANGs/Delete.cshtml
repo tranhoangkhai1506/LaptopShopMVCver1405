@@ -5,28 +5,22 @@
     Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>TAIKHOANKHACHHANG</h4>
+<div style="text-align:center">
+    <h2>Xóa Tài Khoản Khách Hàng</h2>
+    <h3>Bạn có chắc chắn muốn xóa tài khoản này?</h3>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Tên Khách Hàng
+            Tên Đăng Nhập: @Html.DisplayFor(model => model.TENDANGNHAP)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.KHACHHANG.TENKHACHHANG)
-        </dd>
 
         <dt>
-            Mật Khẩu
+            Mật Khẩu: @Html.DisplayFor(model => model.MATKHAU)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MATKHAU)
-        </dd>
+        <dt>
+            Tên Khách Hàng: @Html.DisplayFor(model => model.KHACHHANG.TENKHACHHANG)
+        </dt>
 
     </dl>
 
@@ -35,8 +29,10 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-secondary" style="margin: 0 auto; width: 130px" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <div class="btn btn-info">
+                @Html.ActionLink("Back", "Index", null, new { style = "color: white;" })
+            </div>
         </div>
     }
 </div>

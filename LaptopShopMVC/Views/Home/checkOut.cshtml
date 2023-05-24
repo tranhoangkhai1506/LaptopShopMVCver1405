@@ -10,6 +10,7 @@
     var context = new LaptopShopMVC.Models.LaptopDBContext();
     List<LaptopShopMVC.Extras.cart> mainlist = (List<LaptopShopMVC.Extras.cart>)Session["cart"];
     List<LaptopShopMVC.Extras.ViewCart> viewlist = new List<LaptopShopMVC.Extras.ViewCart>();
+    LaptopShopMVC.Models.TAIKHOANKHACHHANG taiKhoanKH = context.TAIKHOANKHACHHANGs.FirstOrDefault(p => p.TENDANGNHAP.Contains(User.Identity.Name));
 
     if (mainlist != null)
     {
@@ -33,7 +34,6 @@
                     <th>Tên Sản Phẩm</th>
                     <th>Hình</th>
                     <th>Giá Bán</th>
-                    <th>Số Lượng</th>
                     <th>Tổng Tiền</th>
 
                 </tr>
@@ -120,8 +120,9 @@
 
     </dl>
 </div>
-<td><a href="@Url.Action("order", "Home")" class="back-button">THANH TOAN VNPAY</a> </td>
-<a href="@Url.Action("datHang", "Home")" class="back-button">DAT HANG</a>
+<td><a href="@Url.Action("EditKhachHang", "Home", new {id = taiKhoanKH.KHACHHANG.MAKHACHHANG})" class="btn btn-info">Chỉnh sửa thông tin</a> </td>
+<td><a href="@Url.Action("order", "Home")" class="btn btn-success">THANH TOAN VNPAY</a> </td>
+<td><a href="@Url.Action("datHang", "Home")" class="btn btn-success">DAT HANG</a></td>
 <style>
     .back-button {
         padding: 8px 16px;
