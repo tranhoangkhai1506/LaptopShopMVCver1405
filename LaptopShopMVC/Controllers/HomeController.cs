@@ -13,15 +13,13 @@ using LaptopShopMVC.Email;
 using System.Net.Mail;
 using System.Net;
 using System.Text;
-<<<<<<< Updated upstream
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Web.UI.WebControls;
-=======
 using System.Threading.Tasks;
 using System.Data.Entity;
->>>>>>> Stashed changes
+using System.Runtime.Remoting.Contexts;
 
 namespace LaptopShopMVC.Controllers
 {
@@ -496,7 +494,6 @@ namespace LaptopShopMVC.Controllers
             return RedirectToAction("Payment", "VnPay");
         }
 
-<<<<<<< Updated upstream
         public ActionResult viewProfileAndChangePassword(int? id)
         {
             KHACHHANG kHACHHANG = context.KHACHHANGs.FirstOrDefault(p => p.MAKHACHHANG == id);
@@ -508,11 +505,11 @@ namespace LaptopShopMVC.Controllers
             NHANVIEN nHANVIEN = context.NHANVIENs.FirstOrDefault(p => p.MANHANVIEN == id);
             return View(nHANVIEN);
         }
+        // POST: Admin/KHACHHANGs/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
 
-        public async Task<ActionResult> Edit(int? id)
-=======
-        public async Task<ActionResult> EditKhachHang(int? id)
->>>>>>> Stashed changes
+            public async Task<ActionResult> EditKhachHang(int? id)
         {
             if (id == null)
             {
@@ -525,30 +522,25 @@ namespace LaptopShopMVC.Controllers
             }
             return View(kHACHHANG);
         }
-<<<<<<< Updated upstream
-
-        // POST: Admin/KHACHHANGs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "MAKHACHHANG,TENKHACHHANG,EMAIL,CCCD,NGAYSINH,DIACHI,SDT")] KHACHHANG kHACHHANG)
-=======
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditKhachHang([Bind(Include = "MAKHACHHANG,TENKHACHHANG,EMAIL,CCCD,NGAYSINH,DIACHI,SDT")] KHACHHANG kHACHHANG)
->>>>>>> Stashed changes
         {
             if (ModelState.IsValid)
             {
                 context.Entry(kHACHHANG).State = EntityState.Modified;
                 await context.SaveChangesAsync();
-<<<<<<< Updated upstream
-                return RedirectToAction("viewProfileAndChangePassword", "Home", new {id = kHACHHANG.MAKHACHHANG});
+                return RedirectToAction("checkOut", "Home", new {id = kHACHHANG.MAKHACHHANG});
             }
             return View(kHACHHANG);
         }
 
+
+        public ActionResult viewDetailDonHang(int? id)
+        {
+            var listChiTietDonHang = context.CHITIETDONHANGs.Where(p => p.MADONHANG == id).ToList();
+            return View(listChiTietDonHang);
+        }
         public async Task<ActionResult> EditAdmin(int? id)
         {
             if (id == null)
@@ -577,12 +569,6 @@ namespace LaptopShopMVC.Controllers
                 return RedirectToAction("viewProfileAndChangePasswordAdmin", "Home", new { id = nHANVIEN.MANHANVIEN });
             }
             return View(nHANVIEN);
-        }
-
-        public ActionResult viewDetailDonHang(int? id)
-        {
-            var listChiTietDonHang = context.CHITIETDONHANGs.Where(p => p.MADONHANG == id).ToList();
-            return View(listChiTietDonHang);
         }
 
         public async Task<ActionResult> ChangePassword(string id)
@@ -617,13 +603,36 @@ namespace LaptopShopMVC.Controllers
             return View(tAIKHOANKHACHHANG);
         }
 
-       
-=======
-                return RedirectToAction("checkOut");
+
+        public async Task<ActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            KHACHHANG kHACHHANG = await context.KHACHHANGs.FindAsync(id);
+            if (kHACHHANG == null)
+            {
+                return HttpNotFound();
             }
             return View(kHACHHANG);
         }
->>>>>>> Stashed changes
+
+        // POST: Admin/KHACHHANGs/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit([Bind(Include = "MAKHACHHANG,TENKHACHHANG,EMAIL,CCCD,NGAYSINH,DIACHI,SDT")] KHACHHANG kHACHHANG)
+        {
+            if (ModelState.IsValid)
+            {
+                context.Entry(kHACHHANG).State = EntityState.Modified;
+                await context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(kHACHHANG);
+        }
     }
 
 }
