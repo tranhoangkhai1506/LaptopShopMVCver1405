@@ -1,17 +1,20 @@
-﻿@model IEnumerable<LaptopShopMVC.Extras.ViewCart>
+﻿
+@model IEnumerable<LaptopShopMVC.Extras.ViewCart>
+
 @{
+    int stt = 1;
     int count = 0;
     string TongTien = "0.00";
     ViewBag.Title = "ViewCart";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+    
     <table class="table">
         <thead>
             <tr>
                 <th>#</th>
                 <th>Tên Sản Phẩm</th>
-                <th>Hình</th>
+                <th>Hình Sản Phẩm</th>
                 <th>Giá Bán</th>
                 <th>Số Lượng</th>
                 <th>Tổng Tiền</th>
@@ -22,29 +25,35 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.MASANPHAM</td>
+                    <td>@stt</td>
                     <td>@item.TENSANPHAM</td>
-                    <td><img src="~/images/@item.HINH" /></td>
+                    <td><img src="@item.HINH" /></td>
                     <td>@item.GIABAN</td>
                     <td>
-                        <span class="h2" onclick="themSoLuong_cart_soLuong(@item.MASANPHAM,@count)" style="cursor:pointer"> + </span>
-                        <h2 class="inc_count">@item.SOLUONG</h2>
-                        <span class="h2" onclick="giamSoLuong_cart_soLuong(@item.MASANPHAM,@count)" style="cursor:pointer"> - </span>
+                        <span class="fa-sharp fa-light fa-circle-plus fa-2x" onclick="themSoLuong_cart_soLuong(@item.MASANPHAM,@count)" style="cursor: pointer; padding: 5px; "></span>
+                        <span class="inc_count h3">@item.SOLUONG</span>
+                        <span class="fa-sharp fa-light fa-circle-minus fa-2x" onclick="giamSoLuong_cart_soLuong(@item.MASANPHAM,@count)" style="cursor: pointer; padding: 5px; "> - </span>
+
+
                     </td>
                     <td>@item.TONGTIEN</td>
+<<<<<<< Updated upstream
                     <td><a href="#" id="updateButton" onclick="removeToCart(@item.MASANPHAM)">Remove</a></td>
 
+=======
+                    <td><a class="fa-sharp fa-light fa-trash fa-2x" style="cursor:pointer" href="#" onclick="removeToCart(@item.MASANPHAM)"></a></td>
+>>>>>>> Stashed changes
                 </tr>
+                stt++;
                 count++;
                 TongTien = Convert.ToString(Convert.ToDouble(TongTien) + Convert.ToDouble(item.TONGTIEN));
             }
             <tr>
-                <td colpan="5"></td>
                 <td>Tổng Tiền : </td>
                 <td>@TongTien</td>
             </tr>
             <tr>
-                <td><a href="@Url.Action("checkOut", "Home")">Đặt Hàng</a> </td>
+                <td><a class="btn btn-success fa-bounce" href="@Url.Action("checkOut", "Home")">Đặt Hàng</a> </td>
             </tr>
 
         </tbody>
