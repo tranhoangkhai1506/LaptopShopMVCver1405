@@ -144,7 +144,7 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <a href="#top" id="back-to-top">Back to Top</a>
+
         <footer>
             <!-- footer section start -->
             <div class="footer_section layout_padding margin_top_90">
@@ -164,7 +164,7 @@
                                     <ul>
                                         <li><a href="@Url.Action("Index", "Home")">Home</a></li>
                                         <li><a href="@Url.Action("Index", "Home")">Computers</a></li>
-                                        <li><a href="@Url.Action("Index", "Home")">Mans Clothes</a></li>
+                                        <a href="#top" id="back-to-top">Back to Top</a>
                                     </ul>
                                 </div>
                             </div>
@@ -180,8 +180,8 @@
                             </div>
                             <div class="col-lg-3 col-sm-6">
                                 <h4 class="adderss_text">Contact</h4>
-                                <div class="call_text"><img src="~/images/map-icon.png"><span class="paddlin_left_0"><a href="#">London 145 United Kingdom</a></span></div>
-                                <div class="call_text"><img src="~/images/call-icon.png"><span class="paddlin_left_0"><a href="#">+7586656566</a></span></div>
+                                <div class="call_text"><img src="~/images/map-icon.png"><span class="paddlin_left_0"><a href="#">Hồ Chí Minh, Quận 12</a></span></div>
+                                <div class="call_text"><img src="~/images/call-icon.png"><span class="paddlin_left_0"><a href="#">+84355995309</a></span></div>
                             </div>
                         </div>
                     </div>
@@ -208,31 +208,48 @@
     </script>
 
     <!-- Javascript files-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="~/js/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="~/js/popper.min.js"></script>
     <script src="~/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/jquery-3.0.0.min.js"></script>
     <script src="~/js/plugin.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <!-- sidebar -->
     <script src="~/js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="~/js/custom.js"></script>
     <!-- javascript -->
     <script src="~/js/owl.carousel.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <!-- Javascript files-->
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- Include Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Include custom CSS if needed -->
+    <link rel="stylesheet" href="~/css/custom.css">
+
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Include Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Include other scripts if needed -->
+    <script src="~/js/plugin.js"></script>
+    <script src="~/js/owl.carousel.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gijgo/1.9.13/combined/js/gijgo.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+
+    <!-- Include custom scripts -->
+    <script src="~/js/custom.js"></script>
     <script src="~/Areas/Admin/js/scripts.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="~/Areas/Admin/assets/demo/chart-area-demo.js"></script>
     <script src="~/Areas/Admin/assets/demo/chart-bar-demo.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <script src="~/Areas/Admin/js/datatables-simple-demo.js"></script>
-    <script src="https://kit.fontawesome.com/4f23b044a9.js" crossorigin="anonymous"></script>
     <script>
         function openNav() {
             document.getElementById("mySidenav").style.width = "100%";
@@ -242,8 +259,10 @@
             document.getElementById("mySidenav").style.width = "0";
         }
     </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+
+
         function addToCart(MASANPHAM) {
             $.ajax(
                 {
@@ -253,6 +272,13 @@
                     dataType: "json",
                     success: function (res) {
                         document.getElementById("count").innerHTML = res.length;
+                        Swal.fire({
+                          position: 'top-end',
+                          icon: 'success',
+                          title: 'Your work has been saved',
+                          showConfirmButton: false,
+                          timer: 1500
+                        })
                     }
 
                 }
@@ -268,6 +294,12 @@
                     dataType: "json",
                     success: function (res) {
                         console.log(res)
+                        Swal.fire({
+                            title: 'Deleted',
+                            text: "Your product has been deleted.",
+                            icon: 'success',
+                            timer: 3000
+                        })
                         window.location.reload();
                         res.status(200).json({ success: true });
                     }

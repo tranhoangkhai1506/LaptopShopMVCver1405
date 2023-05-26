@@ -32,7 +32,7 @@
                         <span class="h2" onclick="giamSoLuong_cart_soLuong(@item.MASANPHAM,@count)" style="cursor:pointer"> - </span>
                     </td>
                     <td>@item.TONGTIEN</td>
-                    <td><a href="#" onclick="removeToCart(@item.MASANPHAM)">Remove</a></td>
+                    <td><a href="#" id="updateButton" onclick="removeToCart(@item.MASANPHAM)">Remove</a></td>
 
                 </tr>
                 count++;

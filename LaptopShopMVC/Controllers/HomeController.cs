@@ -17,8 +17,6 @@ using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Web.UI.WebControls;
-using System.Threading.Tasks;
-using System.Data.Entity;
 using System.Runtime.Remoting.Contexts;
 
 namespace LaptopShopMVC.Controllers
