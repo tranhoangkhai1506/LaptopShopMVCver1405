@@ -345,7 +345,7 @@ namespace LaptopShopMVC.Controllers
             newPBH.MASANPHAM = sanPham.MASANPHAM;
             newPBH.NGAYBATDAU = DateTime.Now;
             DateTime ngayHienTai = DateTime.Now;
-            int soThangCach = 6; // Số tháng cần cách
+            int soThangCach = Convert.ToInt32(sanPham.THOIGIANBAOHANH); // Số tháng cần cách
 
             DateTime ngayCach = ngayHienTai.AddMonths(soThangCach);
             newPBH.NGAYKETTHUC = ngayCach;
@@ -477,7 +477,13 @@ namespace LaptopShopMVC.Controllers
         public ActionResult order()
         {
             TAIKHOANKHACHHANG taiKhoanKH = context.TAIKHOANKHACHHANGs.FirstOrDefault(p => p.TENDANGNHAP.Contains(User.Identity.Name));
-            
+
+            List<ViewCart> listGioHang = sessionToCart();
+            decimal TongTien = listGioHang
+                        .GroupBy(p => p.MASANPHAM) // Group the items by MASANPHAM
+                        .OrderBy(p => p.Key) // Order the groups by MASANPHAM
+                        .Sum(p => p.Sum(x => decimal.Parse(x.TONGTIEN))); // Calculate the sum of TongTien for each group
+
             if (taiKhoanKH != null && Session["cart"] != null)
             {
                 DONHANG newDonHang = new DONHANG();

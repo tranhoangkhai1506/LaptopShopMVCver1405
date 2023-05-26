@@ -18,15 +18,15 @@
                 <div class="row">
                     @{foreach (var i in Model)
                         {
-                            <div class="col-md-4">
-                                <div class="computer_img"><img src="@i.HINH"></div>
-                                <h4 class="computer_text"><a href="@Url.Action("viewDetail",new {maSanPham = @i.MASANPHAM })">@i.TENSANPHAM</a></h4>
-                                <div class="computer_text_main">
-                                    <h6 class="dell_text"><a>@i.GIABAN</a></h6>
-                                    <h6 class="price_text"><a>@i.GIANHAP</a></h6>
-                                </div>
-                                <button class="btn btn-danger rounded-0" onclick="addToCart(@i.MASANPHAM)">Add To Cart</button>
+                        <div class="col-md-4">
+                            <div class="computer_img"><img src="@i.HINH"></div>
+                            <h4 class="computer_text"><a href="@Url.Action("viewDetail",new {maSanPham = @i.MASANPHAM })">@i.TENSANPHAM</a></h4>
+                            <div class="computer_text_main">
+                                <h6 class="dell_text"><a>@i.GIABAN</a></h6>
+                                <h6 class="price_text"><a>@i.GIANHAP</a></h6>
                             </div>
+                            <div class="cart_bt_1"><a style="cursor: pointer;" onclick="addToCart(@i.MASANPHAM)">Add To Cart</a></div>
+                        </div>
                         }
                     }
                 </div>

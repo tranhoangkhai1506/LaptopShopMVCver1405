@@ -13,7 +13,7 @@
                 <div class="col-md-4">
                     <div class="computer_img"><img src="@Model.HINH"></div>
                     <h4 class="computer_text"><a href="">@Model.TENSANPHAM</a></h4>
-                    <h6 class="computer_text"><a>@Model.GIABAN VNĐ</a></h6>
+                    <h6 class="computer_text"><a>@Model.GIABAN.ToString("N0").Replace(",", "") VNĐ</a></h6>
                 </div>
                 <div class="col-md-4">
                     <h3 class=""><a href="">Thương hiệu: @Model.THUONGHIEU.TENTHUONGHIEU</a></h3>

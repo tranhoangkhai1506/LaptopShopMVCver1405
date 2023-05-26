@@ -27,12 +27,13 @@
                 <tr>
                     <td>@stt</td>
                     <td>@item.TENSANPHAM</td>
-                    <td><img src="@item.HINH" /></td>
-                    <td>@item.GIABAN</td>
+                    <td><img src="@item.HINH" width="200" height="300"/></td>
+                    <td>@item.GIABAN.ToString("#.####").Replace(",", "")</td>
                     <td>
-                        <span class="fa-sharp fa-light fa-circle-plus fa-2x" onclick="themSoLuong_cart_soLuong(@item.MASANPHAM,@count)" style="cursor: pointer; padding: 5px; "></span>
-                        <span class="inc_count h3">@item.SOLUONG</span>
                         <span class="fa-sharp fa-light fa-circle-minus fa-2x" onclick="giamSoLuong_cart_soLuong(@item.MASANPHAM,@count)" style="cursor: pointer; padding: 5px; "> - </span>
+                        <span class="inc_count h3">@item.SOLUONG</span>
+                        <span class="fa-sharp fa-light fa-circle-plus fa-2x" onclick="themSoLuong_cart_soLuong(@item.MASANPHAM,@count)" style="cursor: pointer; padding: 5px; "></span>
+
                     </td>
                     <td>@item.TONGTIEN</td>
                     <td><a class="fa-sharp fa-light fa-trash fa-2x" style="cursor:pointer" href="#" onclick="removeToCart(@item.MASANPHAM)"></a></td>
@@ -42,8 +43,8 @@
                 TongTien = Convert.ToString(Convert.ToDouble(TongTien) + Convert.ToDouble(item.TONGTIEN));
             }
             <tr>
-                <td>Tổng Tiền : </td>
-                <td>@TongTien</td>
+                <td style="font-size: 20px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">TỔNG TIỀN : </td>
+                <td style="font-size: 20px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">@TongTien VNĐ</td>
             </tr>
             <tr>
                 <td><a class="btn btn-success fa-bounce" href="@Url.Action("checkOut", "Home")">Đặt Hàng</a> </td>
