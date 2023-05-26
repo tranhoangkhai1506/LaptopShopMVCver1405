@@ -299,8 +299,9 @@
                             text: "Your product has been deleted.",
                             icon: 'success',
                             timer: 3000
-                        })
-                        window.location.reload();
+                        }).then(function () {
+                            window.location.reload();
+                        });
                         res.status(200).json({ success: true });
                     }
                 }
