@@ -495,7 +495,7 @@ namespace LaptopShopMVC.Controllers
                 creataCTDH(newDonHang.MADONHANG);
                 Session["cart"] = null;
             }
-            return RedirectToAction("Payment", "VnPay");
+            return RedirectToAction("Payment", "VnPay", new {tongTien = TongTien});
         }
 
         public ActionResult viewProfileAndChangePassword(int? id)
