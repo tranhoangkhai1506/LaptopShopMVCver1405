@@ -3,7 +3,7 @@
     ViewBag.Title = "checkOut";
     Layout = "~/Views/Shared/_Layout.cshtml";
     string TongTien = "0.00";
-
+    int stt = 1;
 }
 
 @{
@@ -24,34 +24,38 @@
             obj.HINH = sanPham.HINH;
             obj.GIABAN = sanPham.GIABAN;
             obj.TONGTIEN = Convert.ToString(item.soLuong * Convert.ToDouble(sanPham.GIABAN));
-
+            
             viewlist.Add(obj);
         }
+
         <table class="table">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Tên Sản Phẩm</th>
-                    <th>Hình</th>
+                    <th>Hình Sản Phẩm</th>
                     <th>Giá Bán</th>
+                    <th>Số Lượng</th>
                     <th>Tổng Tiền</th>
 
                 </tr>
             </thead>
             <tbody>
+
                 @foreach (var item in viewlist)
                 {
                     <tr>
-                        <td>@item.MASANPHAM</td>
+                        <td>@stt</td>
                         <td>@item.TENSANPHAM</td>
-                        <td><img src="~/images/@item.HINH" /></td>
+                        <td><img src="@item.HINH" height="200" width="300" /></td>
                         <td>@item.GIABAN</td>
+                        <td>@item.SOLUONG</td>
                         <td>@item.TONGTIEN</td>
                     </tr>
+                    stt++;
                     TongTien = Convert.ToString(Convert.ToDouble(TongTien) + Convert.ToDouble(item.TONGTIEN));
                 }
                 <tr>
-                    <td colpan="5"></td>
                     <td>Tổng Tiền : </td>
                     <td>@TongTien</td>
                 </tr>
@@ -61,68 +65,63 @@
     }
     else
     {
-        <p>go to index</p>
+        <div class="btn btn-close">
+            @Html.ActionLink("Return", "ViewCart", null, new { style = "color: white;" })
+        </div>
     }
 
 }
+<table>
+    <thead>
+        <tr>
+            <th>Thông Tin Khách Hàng</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Tên Khách Hàng:
+                <br />
+                Email:
+                <br />
+                CCCD:
+                <br />
+                Ngày Sinh:
+                <br />
+                Đại Chỉ:
+                <br />
+                Số Điện Thoại
+                <br />
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.TENKHACHHANG)
+                <br />
+                @Html.DisplayFor(model => model.EMAIL)
+                <br />
+                @Html.DisplayFor(model => model.CCCD)
+                <br />
+                @Html.DisplayFor(model => model.NGAYSINH)
+                <br />
+                @Html.DisplayFor(model => model.DIACHI)
+                <br />
+                @Html.DisplayFor(model => model.SDT)
+                <br />
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TENKHACHHANG)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.TENKHACHHANG)
-        </dd>
+    
+<br />
+<tr>
+    <td><a href="@Url.Action("EditKhachHang", "Home", new {id = taiKhoanKH.KHACHHANG.MAKHACHHANG})" class="btn btn-info">Chỉnh sửa thông tin</a></td>
+    <td><a href="@Url.Action("order", "Home")" class="btn btn-success">Thanh Toán Bằng VNPAY</a> </td>
+    <td><a href="@Url.Action("datHang", "Home")" class="btn btn-success">Nhận Tại Cửa Hàng</a></td>
+</tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EMAIL)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EMAIL)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CCCD)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CCCD)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NGAYSINH)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NGAYSINH)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DIACHI)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DIACHI)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SDT)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SDT)
-        </dd>
-
-    </dl>
-</div>
-<td><a href="@Url.Action("EditKhachHang", "Home", new {id = taiKhoanKH.KHACHHANG.MAKHACHHANG})" class="btn btn-info">Chỉnh sửa thông tin</a> </td>
-<td><a href="@Url.Action("order", "Home")" class="btn btn-success">THANH TOAN VNPAY</a> </td>
-<td><a href="@Url.Action("datHang", "Home")" class="btn btn-success">DAT HANG</a></td>
 <style>
     .back-button {
         padding: 8px 16px;
