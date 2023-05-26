@@ -1,0 +1,55 @@
+﻿@model IEnumerable<LaptopShopMVC.Models.SANPHAM>
+
+@{
+    ViewBag.Title = "all_Computer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    LaptopShopMVC.Models.LaptopDBContext db = new LaptopShopMVC.Models.LaptopDBContext();
+    var thuongHieu = db.THUONGHIEUx.ToList();
+}
+
+
+    @{
+        var listThuongHieu = db.THUONGHIEUx.ToList();
+        if (listThuongHieu != null)
+        {
+            foreach (var i in listThuongHieu)
+
+            {
+                <div class="computers_section layout_padding">
+                    <div class="container">
+                        <h1 class="computers_taital">@i.TENTHUONGHIEU</h1>
+                    </div>
+                </div>
+                <div class="computers_section_2">
+                    <div class="container-fluid">
+                        <div class="computer_main">
+                            <div class="row">
+                                @foreach (var item in Model)
+                                {
+
+                                    if (item.THUONGHIEU.TENTHUONGHIEU.Contains(i.TENTHUONGHIEU))
+                                    {
+                                    <div class="col-md-4">
+                                        <div class="computer_img"><img src="@item.HINH"></div>
+                                        <h4 class="computer_text"><a href="@Url.Action("viewDetail", new { maSanPham = @item.MASANPHAM })">@item.TENSANPHAM</a></h4>
+                                        <div class="computer_text_main">
+                                            <h6 class="rate_text"><a>@item.GIABAN.ToString("#.####").Replace(",", "") VND</a></h6>
+                                            @{
+                                                decimal giaAo = @item.GIABAN + (@item.GIABAN * 10 / 100);
+                                            }
+                                            <h6 class="rate_text_1"><a>@giaAo.ToString("#.####").Replace(",", "")</a></h6>
+                                        </div>
+                                        <div class="cart_bt_1"><a style="cursor: pointer;" onclick="addToCart(@item.MASANPHAM)">Add To Cart</a></div>
+                                    </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }

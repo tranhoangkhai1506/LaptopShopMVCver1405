@@ -30,6 +30,8 @@ namespace LaptopShopMVC.Controllers
             var listSanPham = context.SANPHAMs.ToList();
             return View(listSanPham);
         }
+
+
         [HttpGet]
         public ActionResult Searching()
         {
@@ -403,12 +405,13 @@ namespace LaptopShopMVC.Controllers
 
             DONHANG donhang_KH = context.DONHANGs.Where(m => m.MAKHACHHANG == taiKhoanKH.KHACHHANG.MAKHACHHANG).ToArray().Last();
             EmailViewModels emailVm = new EmailViewModels();
+            decimal tongTien = Convert.ToDecimal(donhang_KH.TONGTIEN);
 
             emailVm.EmailBody = @"<h2>Hello " + taiKhoanKH.KHACHHANG.TENKHACHHANG + "! </h2> <br />" +
                             "<h3>THÔNG TIN ĐƠN HÀNG</h3>" +
                             "Mã Đơn Hàng: " + donhang_KH.MADONHANG + "<br/>" +
                             "Ngày Thanh Toán: " + donhang_KH.NGAYTHANHTOAN + "<br/>" +
-                            "Tổng Tiền: " + donhang_KH.TONGTIEN + "<br/>" +
+                            "Tổng Tiền: " + tongTien.ToString("#.####").Replace(",", "") + "<br/>" +
                             "Ngày gửi: " + DateTime.Now.ToString() + "<br/>" +
                             "<br/>Thanks for shopping with FRICA!";
 
@@ -637,6 +640,13 @@ namespace LaptopShopMVC.Controllers
             }
             return View(kHACHHANG);
         }
+
+        public ActionResult all_Computer()
+        {
+            var listSanPham = context.SANPHAMs.ToList();
+            return View(listSanPham);
+        }
+
     }
 
 }

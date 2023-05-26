@@ -49,7 +49,7 @@
                 <div id="mySidenav" class="sidenav">
                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                     <a href="@Url.Action("Index", "Home")">Home</a>
-                    <a href="@Url.Action("Index", "Home")">Computers</a>
+                    <a href="@Url.Action("all_Computer", "Home")">Computers</a>
                     <a href="@Url.Action("Index", "Contact")">Contact</a>
                 </div>
                 <span style="font-size:30px;cursor:pointer; color: #fff;" onclick="openNav()"><img src="~/images/toggle-icon.png"></span>
@@ -298,7 +298,7 @@
                             title: 'Deleted',
                             text: "Your product has been deleted.",
                             icon: 'success',
-                            timer: 3000
+                            timer: 1500
                         }).then(function () {
                             window.location.reload();
                         });
@@ -358,7 +358,7 @@
         display: none;
         position: fixed;
         bottom: 20px;
-        right: 150px;
+        right: 250px;
         width: 40px;
         height: 40px;
         border-radius: 50%;
