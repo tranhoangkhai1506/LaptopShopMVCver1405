@@ -37,95 +37,40 @@ namespace LaptopShopMVC.Controllers
         {
             return View();
         }
-        public ActionResult SearchingResults(string nameLapTop, string nameBrand, double? minPrice, double? maxPrice, string ramValue)
+        public ActionResult SearchingResults(string laptopName, string nameBrand, double? minPrice, double? maxPrice, string ramValue)
         {
-            List<SANPHAM> listSanPhams = null;
 
-            if (nameLapTop != "")
+            // Apply the filter to the list of laptops
+            List<SANPHAM> filteredLaptops = context.SANPHAMs.ToList();
+
+            if (laptopName != null)
             {
-                listSanPhams = context.SANPHAMs.Where(p => p.TENSANPHAM.Contains(nameLapTop)).ToList();
-
-                if (nameBrand != "Select Brand" && nameBrand != "")
-                {
-                    listSanPhams = context.SANPHAMs.Where(p => p.THUONGHIEU.TENTHUONGHIEU.Contains(nameBrand) && p.TENSANPHAM.Contains(nameLapTop)).ToList();
-
-                    if (minPrice != null && maxPrice != null)
-                    {
-                        decimal min = Convert.ToDecimal(minPrice);
-                        decimal max = Convert.ToDecimal(maxPrice);
-
-                        listSanPhams = context.SANPHAMs.Where(p => p.GIABAN >= min & p.GIABAN <= max && p.THUONGHIEU.TENTHUONGHIEU.Contains(nameBrand)).ToList();
-
-                        if (ramValue != "" && ramValue != "Select RAM Value")
-                        {
-                            listSanPhams = context.SANPHAMs.Where(p => p.RAM.Contains(ramValue) && p.TENSANPHAM.Contains(nameLapTop)).ToList(); 
-                        } 
-                    }
-
-                }else if (minPrice != null && maxPrice != null)
-                {
-                    decimal min = Convert.ToDecimal(minPrice);
-                    decimal max = Convert.ToDecimal(maxPrice);
-
-                    listSanPhams = context.SANPHAMs.Where(p => p.GIABAN >= min & p.GIABAN <= max).ToList();
-
-                    if (ramValue != "" && ramValue != "Select RAM Value")
-                    {
-                        listSanPhams = context.SANPHAMs.Where(p => p.RAM.Contains(ramValue) && p.TENSANPHAM.Contains(nameLapTop)).ToList();
-                    }
-                }
-                else
-                {
-                    if (ramValue != "" && ramValue != "Select RAM Value")
-                    {
-                        listSanPhams = context.SANPHAMs.Where(p => p.RAM.Contains(ramValue) && p.TENSANPHAM.Contains(nameLapTop)).ToList();
-                    }
-                }
-            } else if (nameBrand != "Select Brand" && nameBrand != "")
-            {
-                listSanPhams = context.SANPHAMs.Where(p => p.THUONGHIEU.TENTHUONGHIEU.Contains(nameBrand)).ToList();
-
-                if (minPrice != null && maxPrice != null)
-                {
-                    decimal min = Convert.ToDecimal(minPrice);
-                    decimal max = Convert.ToDecimal(maxPrice);
-
-                    listSanPhams = context.SANPHAMs.Where(p => p.GIABAN >= min && p.GIABAN <= max && p.THUONGHIEU.TENTHUONGHIEU.Contains(nameBrand)).ToList(); 
-                }
-                if (ramValue != "" && ramValue != "Select RAM Value")
-                {
-                    listSanPhams = context.SANPHAMs.Where(p => p.RAM.Contains(ramValue) && p.THUONGHIEU.TENTHUONGHIEU.Contains(nameBrand)).ToList();
-                }
+                filteredLaptops = filteredLaptops.Where(laptop => laptop.TENSANPHAM.IndexOf(laptopName, StringComparison.CurrentCultureIgnoreCase) >= 0).ToList();
             }
-            else if (minPrice != null && maxPrice != null)
-            {
-                decimal min = Convert.ToDecimal(minPrice);
-                decimal max = Convert.ToDecimal(maxPrice);
 
-                listSanPhams = context.SANPHAMs.Where(p => p.GIABAN >= min & p.GIABAN <= max).ToList();
-
-                if (ramValue != "" && ramValue != "Select RAM Value")
-                {
-                    listSanPhams = context.SANPHAMs.Where(p => p.RAM.Contains(ramValue) && p.TENSANPHAM.Contains(nameLapTop)).ToList();
-                }
-            } else if (ramValue != "" && ramValue != "Select RAM Value")
+            if (ramValue != "" && ramValue != "Select RAM Value")
             {
-                listSanPhams = context.SANPHAMs.Where(p => p.RAM.Contains(ramValue)).ToList();
+                filteredLaptops = filteredLaptops.Where(laptop => laptop.RAM == ramValue).ToList();
+            }
+
+            if (minPrice != null && maxPrice != null)
+            {
+                filteredLaptops = filteredLaptops.Where(p => p.GIABAN >= Convert.ToDecimal(minPrice) & p.GIABAN <= Convert.ToDecimal(maxPrice)).ToList();
+            }
+
+            if (nameBrand != "Select Brand" && nameBrand != null)
+            {
+                filteredLaptops = filteredLaptops.Where(laptop => laptop.THUONGHIEU.TENTHUONGHIEU.Contains(nameBrand)).ToList();
+            }
+
+            if (filteredLaptops.Count() != 0)
+            {
+                return View(filteredLaptops);
             }
             else
             {
                 return RedirectToAction("errorResult");
             }
-
-            if (listSanPhams.Count() != 0)
-            {
-                return View(listSanPhams);
-            }
-            else
-            {
-                return RedirectToAction("errorResult");
-            }
-
         }
 
         public ActionResult viewAllProductOfBrand(string tenThuongHieu)
