@@ -48,7 +48,7 @@
                         <td>@stt</td>
                         <td>@item.TENSANPHAM</td>
                         <td><img src="@item.HINH" height="200" width="300" /></td>
-                        <td>@item.GIABAN</td>
+                        <td>@item.GIABAN.ToString("#.####").Replace(",", "")</td>
                         <td>@item.SOLUONG</td>
                         <td>@item.TONGTIEN</td>
                     </tr>
@@ -56,8 +56,8 @@
                     TongTien = Convert.ToString(Convert.ToDouble(TongTien) + Convert.ToDouble(item.TONGTIEN));
                 }
                 <tr>
-                    <td>Tổng Tiền : </td>
-                    <td>@TongTien</td>
+                    <td style="font-size: 20px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Tổng Tiền : </td>
+                    <td style="font-size: 20px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">@TongTien VND</td>
                 </tr>
             </tbody>
         </table>
@@ -71,11 +71,11 @@
     }
 
 }
-<table>
+<table class="table table-hover">
     <thead>
         <tr>
-            <th>Thông Tin Khách Hàng</th>
-            <th></th>
+            <td>DANH MỤC</td>
+            <td>THÔNG TIN KHÁCH HÀNG</td>
         </tr>
     </thead>
     <tbody>
@@ -117,9 +117,9 @@
     
 <br />
 <tr>
-    <td><a href="@Url.Action("EditKhachHang", "Home", new {id = taiKhoanKH.KHACHHANG.MAKHACHHANG})" class="btn btn-info">Chỉnh sửa thông tin</a></td>
-    <td><a href="@Url.Action("order", "Home")" class="btn btn-success">Thanh Toán Bằng VNPAY</a> </td>
-    <td><a href="@Url.Action("datHang", "Home")" class="btn btn-success">Nhận Tại Cửa Hàng</a></td>
+    <td><a href="@Url.Action("EditKhachHang", "Home", new {id = taiKhoanKH.KHACHHANG.MAKHACHHANG})" class="btn btn-outline-info"> <i class="fa-solid fa-user"></i> Chỉnh sửa thông tin</a></td>
+    <td><a href="@Url.Action("order", "Home")" class="btn btn-success fa-bounce"><i class="fa-brands fa-cc-amazon-pay"></i> VNPAY</a> </td>
+    <td><a href="@Url.Action("datHang", "Home")" class="btn btn-success fa-bounce"> <i class="fa-solid fa-cart-shopping"></i> Đặt hàng</a></td>
 </tr>
 
 <style>

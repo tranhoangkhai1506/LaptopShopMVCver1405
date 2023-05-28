@@ -31,8 +31,12 @@ namespace LaptopShopMVC.Controllers
                 using (var db = new LaptopDBContext())
                 {
                     user = db.TAIKHOANQUANTRIs.Where(n => n.TENDANGNHAP == tendangnhap && n.MATKHAU == matkhau).FirstOrDefault();
-                    string role = user.PHANQUYEN.TENPHANQUYEN;
-                    Session["role"] = role;
+                    if (user != null)
+                    {
+                        string role = user.PHANQUYEN.TENPHANQUYEN;
+                        Session["role"] = role;
+                    }
+                    
                 }
                 using (var db = new LaptopDBContext())
                 {
