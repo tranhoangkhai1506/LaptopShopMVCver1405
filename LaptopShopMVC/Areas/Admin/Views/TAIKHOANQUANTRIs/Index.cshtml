@@ -12,68 +12,50 @@
     @Html.ActionLink("Create New", "Create", null, new { style = "color: white;" })
 </button>
 <br />
-<table class="table">
-    <thead class="table-info">
-        <tr>
-            <th>
-                Tên Đăng Nhập
-            </th>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        DANH SÁCH TÀI KHOẢN QUẢN TRỊ
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Tên Đăng Nhập</th>
+                    <th>Tên Nhân Viên</th>
+                    <th>Tên Phân Quyền</th>
+                    <th>Mật Khẩu</th>
+                    <th>Tác vụ</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Tên Đăng Nhập</th>
+                    <th>Tên Nhân Viên</th>
+                    <th>Tên Phân Quyền</th>
+                    <th>Mật Khẩu</th>
+                    <th>Tác vụ</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @{
 
-            <th>
-                Tên Nhân Viên
-            </th>
-            <th>
-                Tên Phân Quyền
-            </th>
-            <th>
-                Mật Khẩu
-            </th>
-            <th>
-                Chức Năng
-            </th>
-        </tr>
-    </thead>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TENDANGNHAP)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NHANVIEN.TENNHANVIEN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PHANQUYEN.TENPHANQUYEN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MATKHAU)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.TENDANGNHAP }) |
-                @Html.ActionLink("Details", "Details", new { id = item.TENDANGNHAP }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.TENDANGNHAP })
-            </td>
-        </tr>
-    }
-
-</table>
-
-<style>
-    .table {
-        width: 95%;
-        margin: 0 auto;
-    }
-
-        .table tr:hover {
-            background-color: #f5f5f5;
-        }
-
-    table {
-        width: 100%;
-    }
-
-    td, th {
-        border: 1px solid black;
-    }
-</style>
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.TENDANGNHAP</td>
+                            <td>@item.NHANVIEN.TENNHANVIEN</td>
+                            <td>@item.PHANQUYEN.TENPHANQUYEN</td>
+                            <td>@item.MATKHAU</td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.TENDANGNHAP }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.TENDANGNHAP }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.TENDANGNHAP })
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -11,99 +11,65 @@
     @Html.ActionLink("Create New", "Create", null, new { style = "color: white;" })
 </button>
 <br />
-<table class="table" style="text-align:center">
-    <thead class="table-info">
-        <tr>
-            <th>
-                Mã Nhân Viên
-            </th>
-            <th>
-                Tên Nhân Viên
-            </th>
-            <th>
-                Hình Ảnh
-            </th>
-            <th>
-                Ngày Sinh
-            </th>
-            <th>
-                CCCD
-            </th>
-            <th>
-                Chức Vụ
-            </th>
-            <th>
-                Địa Chỉ
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                SĐT
-            </th>
-            <th>
-                Chức Năng
-            </th>
-        </tr>
-    </thead>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        DANH SÁCH NHÂN VIÊN
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Mã Nhân Viên</th>
+                    <th> Tên Nhân Viên</th>
+                    <th>Hình Ảnh</th>
+                    <th>Ngày Sinh</th>
+                    <th>CCCD</th>
+                    <th> Chức Vụ</th>
+                    <th>Địa Chỉ</th>
+                    <th>Email</th>
+                    <th> SĐT</th>
+                    <th> Tác vụ</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Mã Nhân Viên</th>
+                    <th> Tên Nhân Viên</th>
+                    <th>Hình Ảnh</th>
+                    <th>Ngày Sinh</th>
+                    <th>CCCD</th>
+                    <th> Chức Vụ</th>
+                    <th>Địa Chỉ</th>
+                    <th>Email</th>
+                    <th> SĐT</th>
+                    <th> Tác vụ</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @{
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MANHANVIEN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TENNHANVIEN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HINH)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NGAYSINH)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CCCD)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CHUCVU)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DIACHI)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EMAIL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SDT)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.MANHANVIEN }) |
-                @Html.ActionLink("Details", "Details", new { id = item.MANHANVIEN }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.MANHANVIEN })
-            </td>
-        </tr>
-    }
-
-</table>
-<style>
-
-
-    table {
-        width: 100%;
-    }
-
-    td, th {
-        border: 1px solid black;
-    }
-
-    .table {
-        width: 95%;
-        margin: 0 auto;
-    }
-
-        .table tr:hover {
-            background-color: #f5f5f5;
-        }
-
-</style>
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.MANHANVIEN</td>
+                            <td>@item.TENNHANVIEN</td>
+                            <td><img src="~/images/Acer_1.jpg" alt="Alternate Text" width="50" height="30"/></td>
+                            <td>@item.NGAYSINH</td>
+                            <td>@item.CCCD</td>
+                            <td>@item.CHUCVU</td>
+                            <td>@item.DIACHI</td>
+                            <td>@item.EMAIL</td>
+                            <td>@item.SDT</td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.MANHANVIEN }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.MANHANVIEN }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.MANHANVIEN })
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -11,77 +11,59 @@
     @Html.ActionLink("Create New", "Create", null, new { style = "color: white;" })
 </button>
 <br />
-<table class="table" style="text-align:center">
-    <thead class="table-info">
-        <tr>
-            <th>
-                Tên Khách Hàng
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                CCCD
-            </th>
-            <th>
-                Ngày Sinh
-            </th>
-            <th>
-                Địa Chỉ
-            </th>
-            <th>
-                Số Điện Thoại
-            </th>
-            <th>
-                Chức Năng
-            </th>
-        </tr>
-    </thead>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        DANH SÁCH KHÁCH HÀNG
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Mã khách hàng</th>
+                    <th>Tên khách hàng</th>
+                    <th>Email</th>
+                    <th>căn cước công dân</th>
+                    <th>Ngày Sinh</th>
+                    <th>Địa chỉ</th>
+                    <th>Số điện thoại</th>
+                    <th>Tác vụ</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Mã khách hàng</th>
+                    <th>Tên khách hàng</th>
+                    <th>Email</th>
+                    <th>Căn cước công dân</th>
+                    <th>Ngày Sinh</th>
+                    <th>Địa chỉ</th>
+                    <th>Số điện thoại</th>
+                    <th>Tác vụ</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @{
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TENKHACHHANG)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EMAIL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CCCD)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NGAYSINH)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DIACHI)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SDT)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.MAKHACHHANG }) |
-                @Html.ActionLink("Details", "Details", new { id = item.MAKHACHHANG }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.MAKHACHHANG })
-            </td>
-        </tr>
-    }
-</table>
-<style>
-    table {
-        width: 100%;
-    }
-
-    td, th {
-        border: 1px solid black;
-    }
-
-    .table {
-        width: 95%;
-        margin: 0 auto;
-    }
-
-        .table tr:hover {
-            background-color: #f5f5f5;
-        }
-</style>
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.MAKHACHHANG</td>
+                            <td>@item.TENKHACHHANG</td>
+                            <td>@item.EMAIL</td>
+                            <td>@item.CCCD</td>
+                            <td>@item.NGAYSINH</td>
+                            <td>@item.DIACHI</td>
+                            <td>@item.SDT</td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.MAKHACHHANG }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.MAKHACHHANG }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.MAKHACHHANG })
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -11,61 +11,49 @@
     @Html.ActionLink("Create New", "Create", null, new { style = "color: white;" })
 </button>
 <br />
-<table class="table" style="text-align:center">
-    <thead class="table-info">
-        <tr>
-            <th>
-                Mã Phân Quyền
-            </th>
-            <th>
-                Tên Phân Quyền
-            </th>
-            <th>
-                Quyền Hạn
-            </th>
-            <th>
-                Chức Năng
-            </th>
-        </tr>
-    </thead>
-    
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MAPHANQUYEN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TENPHANQUYEN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QUYENHAN)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.MAPHANQUYEN }) |
-                @Html.ActionLink("Details", "Details", new { id = item.MAPHANQUYEN }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.MAPHANQUYEN })
-            </td>
-        </tr>
-    }
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        DANH SÁCH PHÂN QUYỀN
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Mã Phân Quyền</th>
+                    <th>Tên Phân Quyền</th>
+                    <th>Quyền Hạn</th>
+                    <th>Tác vụ</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Mã Phân Quyền</th>
+                    <th>Tên Phân Quyền</th>
+                    <th>Quyền Hạn</th>
+                    <th>Tác vụ</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @{
 
-</table>
-<style>
-    .table {
-        width: 95%;
-        margin: 0 auto;
-    }
-
-        .table tr:hover {
-            background-color: #f5f5f5;
-        }
-
-    table {
-        width: 100%;
-    }
-
-    td, th {
-        border: 1px solid black;
-    }
-</style>
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.MAPHANQUYEN</td>
+                            <td>@item.TENPHANQUYEN</td>
+                            <td>@item.QUYENHAN</td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.MAPHANQUYEN }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.MAPHANQUYEN }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.MAPHANQUYEN })
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+hu

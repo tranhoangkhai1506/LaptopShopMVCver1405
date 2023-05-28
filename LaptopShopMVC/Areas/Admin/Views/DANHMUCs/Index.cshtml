@@ -11,59 +11,45 @@
     @Html.ActionLink("Create New", "Create",null, new { style = "color: white;"})
 </button>
 <br />
-<table class="table" style="text-align:center">
-    <thead class="table-info">
-        <tr>
-            <th>
-                Mã Danh Mục
-            </th>
-            <th>
-                Tên Danh Mục
-            </th>
-            <th>
-                Chức Năng
-            </th>
-        </tr>
-    </thead>
 
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MADANHMUC)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TENDANHMUC)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.MADANHMUC }) |
-                @Html.ActionLink("Details", "Details", new { id = item.MADANHMUC }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.MADANHMUC })
-            </td>
-        </tr>
-    }
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        DANH SÁCH DANH MỤC
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Mã danh mục</th>
+                    <th>Tên danh mục</th>
+                    <th>Tác vụ</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Mã danh mục</th>
+                    <th>Tên danh mục</th>
+                    <th>Tác vụ</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @{
 
-</table>
-
-<style>
-    table {
-        width: 100%;
-    }
-
-    #btncreate{
-        margin: 0 auto;
-        width: 130px;
-    }
-    
-    td, th{
-        border: 1px solid black;
-    }
-
-    .table {
-        width: 95%;
-        margin: 0 auto;
-    }
-
-        .table tr:hover {
-            background-color: #f5f5f5;
-        }
-</style>
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.MADANHMUC</td>
+                            <td>@item.TENDANHMUC</td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.MADANHMUC }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.MADANHMUC }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.MADANHMUC })
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
