@@ -8,67 +8,50 @@
 
 <h2 style="text-align:center">Chi Tiết Đơn Hàng</h2>
 
-<table class="table" style="text-align:center">
-    <thead class="table-info">
-        <tr>
-            <th>
-                Mã Hóa Đơn
-            </th>
-            <th>
-                Tên Sản Phẩm
-            </th>
-            <th>
-                Số Lượng
-            </th>
-            <th>
-                Giá
-            </th>
-            <th>
-                Ngày Lập
-            </th>
-        </tr>
-    </thead>
-    
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        CHI TIẾT ĐƠN HÀNG
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Tên khách hàng</th>
+                    <th>Sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Giá</th>
+                    <th>Ngày lập</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Tên khách hàng</th>
+                    <th>Sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Giá</th>
+                    <th>Ngày lập</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @{
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DONHANG.MADONHANG)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SANPHAM.TENSANPHAM)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SOLUONG)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GIA)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NGAYLAP)
-            </td>
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.MADONHANG</td>
+                            <td>@item.DONHANG.KHACHHANG.TENKHACHHANG</td>
+                            <td>@item.SANPHAM.TENSANPHAM</td>
+                            <td>@item.SOLUONG</td>
+                            <td>@item.GIA</td>
+                            <td>@item.NGAYLAP</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
-        </tr>
-    }
-
-</table>
-
-<style>
-    table {
-        width: 100%;
-    }
-
-    td, th {
-        border: 1px solid black;
-    }
-
-    .table {
-        width: 95%;
-        margin: 0 auto;
-    }
-
-        .table tr:hover {
-            background-color: #f5f5f5;
-        }
-</style>

@@ -12,73 +12,54 @@
     @Html.ActionLink("Create New", "Create", null, new { style = "color: white;" })
 </button>
 <br />
-<table class="table" style="text-align:center">
-    <thead class="table-info">
-        <tr>
-            <th>
-                Mã Đơn Hàng
-            </th>
-            <th>
-                Tên Khách Hàng
-            </th>
-            <th>
-                Tên Nhân Viên
-            </th>
-            <th>
-                Tổng Tiền
-            </th>
-            <th>
-                Ngày Thanh Toán
-            </th>
-            <th>
-                Chức Năng
-            </th>
-        </tr>
-    </thead>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MADONHANG)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KHACHHANG.TENKHACHHANG)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NHANVIEN.TENNHANVIEN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TONGTIEN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NGAYTHANHTOAN)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.MADONHANG }) |
-                @Html.ActionLink("Details", "Details", new { id = item.MADONHANG }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.MADONHANG })
-            </td>
-        </tr>
-    }
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        DANH SÁCH ĐƠN HÀNG
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Tên khách hàng</th>
+                    <th>Email</th>
+                    <th>Địa chỉ</th>
+                    <th>Ngày thanh toán</th>
+                    <th>Tổng tiền</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Tên khách hàng</th>
+                    <th>Email</th>
+                    <th>Ngày thanh toán</th>
+                    <th>Tổng tiền</th>
+                    <th>Tác vụ</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @{
 
-</table>
-
-<style>
-    .table {
-        width: 95%;
-        margin: 0 auto;
-    }
-
-        .table tr:hover {
-            background-color: #f5f5f5;
-        }
-
-    table {
-        width: 100%;
-    }
-
-    td, th {
-        border: 1px solid black;
-    }
-</style>
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.MADONHANG</td>
+                            <td>@item.KHACHHANG.TENKHACHHANG</td>
+                            <td>@item.KHACHHANG.EMAIL</td>
+                            <td>@item.NGAYTHANHTOAN</td>
+                            <td>@item.TONGTIEN</td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.MADONHANG }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.MADONHANG }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.MADONHANG })
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

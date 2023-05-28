@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@{
+    LaptopShopMVC.Models.LaptopDBContext context = new LaptopShopMVC.Models.LaptopDBContext();
+    string tendangnhap = User.Identity.Name;
+    LaptopShopMVC.Models.TAIKHOANQUANTRI taiKhoanDangNhap = context.TAIKHOANQUANTRIs.FirstOrDefault(p => p.TENDANGNHAP.Contains(tendangnhap));
+    //string role = taiKhoanDangNhap.PHANQUYEN.TENPHANQUYEN;
+    var role = Session["role"];
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -52,6 +60,7 @@
             </li>
         </ul>
     </nav>
+
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -73,7 +82,6 @@
                                 <a class="nav-link" href="@Url.Action("Index", "DANHMUCs", new { area = "Admin" })">Danh Mục</a>
                                 <a class="nav-link" href="@Url.Action("Index", "THUONGHIEUx", new { area = "Admin" })">Thương Hiệu</a>
                                 <a class="nav-link" href="@Url.Action("Index", "SANPHAMs", new { area = "Admin" })">Sản Phẩm</a>
-                                <a class="nav-link" href="@Url.Action("LogOff", "HomeAdmin", new { area = "Admin" })">Logout</a>
                             </nav>
                         </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -89,9 +97,9 @@
                                 </a>
                                 <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="@Url.Action("Index", "PHANQUYENs", new { area = "Admin" })">Phân Quyền</a>
-                                        <a class="nav-link" href="@Url.Action("Index", "NHANVIENs", new { area = "Admin" })">Nhân Viên</a>
-                                        <a class="nav-link" href="@Url.Action("Index", "TAIKHOANQUANTRIs", new { area = "Admin" })">Tài Khoản</a>
+                                        <a class="nav-link admin-link" href="@Url.Action("Index", "PHANQUYENs", new { area = "Admin" })">Phân Quyền</a>
+                                        <a class="nav-link admin-link" href="@Url.Action("Index", "NHANVIENs", new { area = "Admin" })">Nhân Viên</a>
+                                        <a class="nav-link admin-link" href="@Url.Action("Index", "TAIKHOANQUANTRIs", new { area = "Admin" })">Tài Khoản</a>
                                     </nav>
                                 </div>
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
@@ -174,3 +182,44 @@
     <script src="https://kit.fontawesome.com/4f23b044a9.js" crossorigin="anonymous"></script>
 </body>
 </html>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@*<script>
+    document.getElementById('admin-link').addEventListener('click', function (event) {
+        event.preventDefault();
+
+        var user = '@role';
+
+        if (user === 'admin') {
+            window.location.href = event.target.href;
+        } else {
+            // Code for non-admin access
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'You are not authorized as an admin.'
+            })
+        }
+    });
+</script>*@
+
+<script>
+    var user = '@role'; 
+    var links = document.getElementsByClassName('admin-link');
+
+    for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function (event) {
+            event.preventDefault(); 
+
+            if (user === 'admin') {
+                window.location.href = event.target.href;
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'You are not authorized as an admin.'
+                })
+            }
+        });
+    }
+</script>

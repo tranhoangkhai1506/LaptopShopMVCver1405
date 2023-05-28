@@ -11,59 +11,54 @@
     @Html.ActionLink("Create New", "Create", null, new { style = "color: white;" })
 </button>
 <br />
-<table class="table" style="text-align:center">
-    <thead class="table-info">
-        <tr>
-            <th>
-                Tên Nhân Viên
-            </th>
-            <th>
-                Ngày Nhập Hàng
-            </th>
-            <th>
-                Tổng Tiền
-            </th>
-            <th>
-                Chức Năng
-            </th>
-        </tr>
-    </thead>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NHANVIEN.TENNHANVIEN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NGAYNHAPHANG)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TONGTIEN)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.MAPHIEUNHAPHANG }) |
-                @Html.ActionLink("Details", "Details", new { id = item.MAPHIEUNHAPHANG }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.MAPHIEUNHAPHANG })
-            </td>
-        </tr>
-    }
 
-</table>
-<style>
-    table {
-        width: 100%;
-    }
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        PHIẾU NHẬP HÀNG
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Mã Phiếu nhập</th>
+                    <th>Mã nhân viên</th>
+                    <th>Tên nhân viên</th>
+                    <th>Ngày nhập</th>
+                    <th>Tổng Tiền</th>
+                    <th>Tác vụ</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Mã Phiếu nhập</th>
+                    <th>Mã nhân viên</th>
+                    <th>Tên nhân viên</th>
+                    <th>Ngày nhập</th>
+                    <th>Tổng Tiền</th>
+                    <th>Tác vụ</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @{
 
-    td, th {
-        border: 1px solid black;
-    }
-
-    .table {
-        width: 95%;
-        margin: 0 auto;
-    }
-
-        .table tr:hover {
-            background-color: #f5f5f5;
-        }
-</style>
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.MAPHIEUNHAPHANG</td>
+                            <td>@item.MANHANVIEN</td>
+                            <td>@item.NHANVIEN.TENNHANVIEN</td>
+                            <td>@item.NGAYNHAPHANG</td>
+                            <td>@item.TONGTIEN</td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.MAPHIEUNHAPHANG }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.MAPHIEUNHAPHANG }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.MAPHIEUNHAPHANG })
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
