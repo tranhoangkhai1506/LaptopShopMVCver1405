@@ -581,7 +581,7 @@ namespace LaptopShopMVC.Controllers
             {
                 context.Entry(kHACHHANG).State = EntityState.Modified;
                 await context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("viewProfileAndChangePassword", "Home", new { id =  kHACHHANG.MAKHACHHANG });
             }
             return View(kHACHHANG);
         }
