@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Web.UI.WebControls;
 using System.Runtime.Remoting.Contexts;
+using System.Web.Services.Description;
 
 namespace LaptopShopMVC.Controllers
 {
@@ -69,7 +70,7 @@ namespace LaptopShopMVC.Controllers
             }
             else
             {
-                return RedirectToAction("errorResult");
+                return RedirectToAction("errorResult", new { message = "We're sorry, we did not find any products. Please enter the information you are looking for. Thank You!" });
             }
         }
 
@@ -80,7 +81,7 @@ namespace LaptopShopMVC.Controllers
             {
                 return View(listSanPham);
             }
-            return RedirectToAction("errorResult");
+            return RedirectToAction("errorResult",new { message  = "We're sorry, we did not find any products. Please enter the information you are looking for. Thank You!" });
         }
 
         public ActionResult viewDetail(int maSanPham)
@@ -90,11 +91,12 @@ namespace LaptopShopMVC.Controllers
             {
                 return View(sanPham);
             }
-            return RedirectToAction("errorResult");
+            return RedirectToAction("errorResult", new { message = "We're sorry, we did not find any products. Please enter the information you are looking for. Thank You!" });
         }
 
-        public ActionResult errorResult()
+        public ActionResult errorResult(string message)
         {
+            ViewBag.Message = message;
             return View();
         }
 
@@ -167,8 +169,10 @@ namespace LaptopShopMVC.Controllers
                 }
                 return View(viewlist);
             }
-            return RedirectToAction("errorResult");
-
+            else
+            {
+                return RedirectToAction("errorResult", new { message = "We're sorry, Your cart is empty. Thank You!" });
+            }
         }
 
         public ActionResult themSoLuong_cart(int id)
@@ -250,10 +254,16 @@ namespace LaptopShopMVC.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("errorResult");
+                    return RedirectToAction("errorResult", new
+                    {
+                        message = "Bạn cần đăng nhập bằng tài khoản khách hàng để mua hàng!"
+                    });
                 }
             }
-            return RedirectToAction("errorResult");
+            return RedirectToAction("errorResult", new
+            {
+                message = "Bạn cần đăng nhập bằng tài khoản khách hàng để mua hàng!"
+            });
 
         }
         public List<ViewCart> sessionToCart()

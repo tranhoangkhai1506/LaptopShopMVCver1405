@@ -7,49 +7,62 @@
     string TongTien = "0.00";
     ViewBag.Title = "ViewCart";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int soLuongSanPham = Model.Count();
 }
-    
-    <table class="table">
-        <thead>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Tên Sản Phẩm</th>
+            <th>Hình Sản Phẩm</th>
+            <th>Giá Bán</th>
+            <th>Số Lượng</th>
+            <th>Tổng Tiền</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>#</th>
-                <th>Tên Sản Phẩm</th>
-                <th>Hình Sản Phẩm</th>
-                <th>Giá Bán</th>
-                <th>Số Lượng</th>
-                <th>Tổng Tiền</th>
+                <td>@stt</td>
+                <td>@item.TENSANPHAM</td>
+                <td><img src="@item.HINH" width="200" height="300" /></td>
+                <td>@item.GIABAN.ToString("#.####").Replace(",", "")</td>
+                <td>
+                    <span class="fa-sharp fa-light fa-circle-minus fa-2x" onclick="giamSoLuong_cart_soLuong(@item.MASANPHAM,@count)" style="cursor: pointer; padding: 5px; "> - </span>
+                    <span class="inc_count h3">@item.SOLUONG</span>
+                    <span class="fa-sharp fa-light fa-circle-plus fa-2x" onclick="themSoLuong_cart_soLuong(@item.MASANPHAM,@count)" style="cursor: pointer; padding: 5px; "></span>
 
+                </td>
+                <td>@item.TONGTIEN</td>
+                <td><a class="fa-sharp fa-light fa-trash fa-2x" style="cursor:pointer" href="#" onclick="removeToCart(@item.MASANPHAM)"></a></td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@stt</td>
-                    <td>@item.TENSANPHAM</td>
-                    <td><img src="@item.HINH" width="200" height="300"/></td>
-                    <td>@item.GIABAN.ToString("#.####").Replace(",", "")</td>
-                    <td>
-                        <span class="fa-sharp fa-light fa-circle-minus fa-2x" onclick="giamSoLuong_cart_soLuong(@item.MASANPHAM,@count)" style="cursor: pointer; padding: 5px; "> - </span>
-                        <span class="inc_count h3">@item.SOLUONG</span>
-                        <span class="fa-sharp fa-light fa-circle-plus fa-2x" onclick="themSoLuong_cart_soLuong(@item.MASANPHAM,@count)" style="cursor: pointer; padding: 5px; "></span>
+            stt++;
+            count++;
+            TongTien = Convert.ToString(Convert.ToDouble(TongTien) + Convert.ToDouble(item.TONGTIEN));
+        }
+        <tr>
+            <td style="font-size: 20px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">TỔNG TIỀN : </td>
+            <td style="font-size: 20px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">@TongTien VNĐ</td>
+        </tr>
+        @{ }
+        <tr>
+            <td><a id="checkout-button" class="btn btn-success fa-bounce" href="@Url.Action("checkOut", "Home")"> <i class="fa-solid fa-square-check"></i> Đặt Hàng</a> </td>
+        </tr>
 
-                    </td>
-                    <td>@item.TONGTIEN</td>
-                    <td><a class="fa-sharp fa-light fa-trash fa-2x" style="cursor:pointer" href="#" onclick="removeToCart(@item.MASANPHAM)"></a></td>
-                </tr>
-                stt++;
-                count++;
-                TongTien = Convert.ToString(Convert.ToDouble(TongTien) + Convert.ToDouble(item.TONGTIEN));
-            }
-            <tr>
-                <td style="font-size: 20px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">TỔNG TIỀN : </td>
-                <td style="font-size: 20px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">@TongTien VNĐ</td>
-            </tr>
-            <tr>
-                <td><a class="btn btn-success fa-bounce" href="@Url.Action("checkOut", "Home")"> <i class="fa-solid fa-square-check"></i> Đặt Hàng</a> </td>
-            </tr>
+    </tbody>
+</table>
 
-        </tbody>
-    </table>
+@section scripts {
+    <script>
+        var soLuong = @soLuongSanPham;
+        if (soLuong === 0) {
+            document.getElementById('checkout-button').style.display = 'none';
+        } else {
+            document.getElementById('checkout-button').style.display = 'block';
+        }
 
+    </script>
+}
